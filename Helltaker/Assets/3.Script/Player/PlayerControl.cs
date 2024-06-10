@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //GetRay(1, 0);
         if (!isMoving)
             InputMove();
     }
@@ -28,26 +29,45 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
             Move(0, 1);
         else if (Input.GetKey(KeyCode.DownArrow))
-            Move(0, -1);     
+            Move(0, -1);
         else if (Input.GetKey(KeyCode.LeftArrow))
-            Move(-1, 0);     
+            Move(-1, 0);
         else if (Input.GetKey(KeyCode.RightArrow))
             Move(1, 0);
     }
 
     private void Move(int x, int y)
     {
-        isMoving = true;
-        animator.SetBool("isMoving", true);
-        //transform.position += new Vector3(x, y, 0);
         if (x == -1)
             renderer.flipX = true;
         else if (x == 1)
             renderer.flipX = false;
 
+        isMoving = true;
+
+        Collider2D collider = GetRay(x, y);
+        if (collider != null)
+        {
+            //StartCoroutine(Move_co(new Vector3(0, 0, 0)));
+            if(collider.gameObject.CompareTag("Kickable"))
+            {
+                //킥 애니메이션 출력
+                // collider 킥 함수 실행
+                animator.SetTrigger("Kick");
+
+                isMoving = false;
+                return;
+            }
+            //Debug.Log(collider.gameObject.tag);
+            isMoving = false;
+            return;
+        }
+
+        animator.SetBool("isMoving", true);
+        //transform.position += new Vector3(x, y, 0);
+
         StartCoroutine(Move_co(new Vector3(x, y, 0)));
     }
-
     private IEnumerator Move_co(Vector3 direction)
     {
         Vector3 startPosition = transform.position;
@@ -65,5 +85,17 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isMoving = false;
         animator.SetBool("isMoving", false);
+    }
+
+    private Collider2D GetRay(int x, int y)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(x, y, 0), 1, LayerMask.GetMask("Obstacle"));
+        Debug.DrawRay(transform.position, new Vector3(x, y, 0), Color.red, 3f);
+        if(hit.collider != null)
+        {
+            //Debug.Log(hit.collider.name);
+            return hit.collider;
+        }
+        return null;
     }
 }
