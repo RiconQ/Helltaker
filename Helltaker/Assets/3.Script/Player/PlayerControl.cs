@@ -4,28 +4,21 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    // 키보드 입력으로 상하좌우 이동
-    // 키보드 한 번 입력으로 한 번 이동
-    // 계속 누르고 있으면 벽을 만날때까지 이동 -> 일정한 간격 -> 코루틴?
-    // 카운터 X이후로 방향키 입력이 있을시 사망
 
-    [SerializeField] private float moveDuration = 1f;
+    [SerializeField] private float moveSpeed = 1f;
     private Coroutine moveCoroutine;
     private bool isMoving = false;
     private Animator animator;
+    private SpriteRenderer renderer;
 
     private void Awake()
     {
+        renderer = transform.GetComponent<SpriteRenderer>();
         animator = transform.GetComponent<Animator>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        //float x = Input.GetAxisRaw("Horizontal");
-        //float y = Input.GetAxisRaw("Vertical");
-        // 키보드 입력시 Move 함수 호출
-        // 추후에 수정 필요
-
         if (!isMoving)
             InputMove();
     }
@@ -44,30 +37,33 @@ public class PlayerControl : MonoBehaviour
 
     private void Move(int x, int y)
     {
-        Debug.Log($"move : {x}, {y}");
-        animator.SetFloat("Horizontal", x);
-        animator.SetFloat("Vertical", y);
         isMoving = true;
-        moveCoroutine = StartCoroutine(Move_co(new Vector3(x, y, 0)));
+        animator.SetBool("isMoving", true);
+        //transform.position += new Vector3(x, y, 0);
+        if (x == -1)
+            renderer.flipX = true;
+        else if (x == 1)
+            renderer.flipX = false;
 
+        StartCoroutine(Move_co(new Vector3(x, y, 0)));
     }
 
     private IEnumerator Move_co(Vector3 direction)
     {
-        Vector3 targetPosition = transform.position + direction;
         Vector3 startPosition = transform.position;
-        float elapsedTime = 0f;
+        Vector3 targetPosition = startPosition + direction;
+        float elapsedTime = 0;
 
-        while (elapsedTime < moveDuration)
+        while (elapsedTime < 1.0f)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
-            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime);
+            elapsedTime += Time.deltaTime * moveSpeed;
             yield return null;
         }
 
         transform.position = targetPosition;
+        yield return new WaitForSeconds(0.1f);
         isMoving = false;
-        animator.SetFloat("Horizontal", 0);
-        animator.SetFloat("Vertical", 0);
+        animator.SetBool("isMoving", false);
     }
 }
