@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 10f;
     private bool isMoving = false;
     private Animator animator;
     private SpriteRenderer renderer;
@@ -93,7 +93,7 @@ public class PlayerControl : MonoBehaviour
     private Collider2D GetRay(int x, int y)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(x, y, 0), 1, LayerMask.GetMask("Obstacle"));
-        Debug.DrawRay(transform.position, new Vector3(x, y, 0), Color.red, 3f);
+        //Debug.DrawRay(transform.position, new Vector3(x, y, 0), Color.red, 3f);
         if(hit.collider != null)
         {
             //Debug.Log(hit.collider.name);
