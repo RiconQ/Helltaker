@@ -6,7 +6,6 @@ public class PlayerControl : MonoBehaviour
 {
 
     [SerializeField] private float moveSpeed = 1f;
-    private Coroutine moveCoroutine;
     private bool isMoving = false;
     private Animator animator;
     private SpriteRenderer renderer;
@@ -17,22 +16,25 @@ public class PlayerControl : MonoBehaviour
         animator = transform.GetComponent<Animator>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        //GetRay(1, 0);
         if (!isMoving)
+        {
+            //Debug.Log(isMoving);
             InputMove();
+        }
+        //Debug.Log(isMoving);
     }
 
     private void InputMove()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
             Move(0, 1);
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
             Move(0, -1);
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
             Move(-1, 0);
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
             Move(1, 0);
     }
 
@@ -54,6 +56,7 @@ public class PlayerControl : MonoBehaviour
                 //킥 애니메이션 출력
                 // collider 킥 함수 실행
                 animator.SetTrigger("Kick");
+                collider.gameObject.GetComponent<Kickable>().Kick(x, y);
 
                 isMoving = false;
                 return;
@@ -82,7 +85,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         transform.position = targetPosition;
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.2f);
         isMoving = false;
         animator.SetBool("isMoving", false);
     }
