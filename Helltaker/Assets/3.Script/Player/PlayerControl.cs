@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour
     private Animator animator;
     private SpriteRenderer renderer;
 
+    [SerializeField] private bool hasKey = false;
+
     private void Awake()
     {
         renderer = transform.GetComponent<SpriteRenderer>();
@@ -36,6 +38,9 @@ public class PlayerControl : MonoBehaviour
             Move(-1, 0);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             Move(1, 0);
+        else return;
+        // 무브가 끝나고 현재 위치에 가시가 있는지 확인 
+        //CheckSpike();
     }
 
     private void Move(int x, int y)
@@ -49,22 +54,13 @@ public class PlayerControl : MonoBehaviour
 
         Collider2D collider = GetRay(x, y);
         if (collider != null)
-        {
-            //StartCoroutine(Move_co(new Vector3(0, 0, 0)));
-            if(collider.gameObject.CompareTag("Kickable"))
+            if (CheckObstacle(collider, x, y))
             {
-                //킥 애니메이션 출력
-                // collider 킥 함수 실행
-                animator.SetTrigger("Kick");
-                collider.gameObject.GetComponent<Kickable>().Kick(x, y);
-
-                isMoving = false;
+                CheckSpike();
                 return;
             }
-            //Debug.Log(collider.gameObject.tag);
-            isMoving = false;
-            return;
-        }
+
+        GameManager.instance.UseTurn(1);
 
         animator.SetBool("isMoving", true);
         //transform.position += new Vector3(x, y, 0);
@@ -86,19 +82,79 @@ public class PlayerControl : MonoBehaviour
 
         transform.position = targetPosition;
         //yield return new WaitForSeconds(0.2f);
+        CheckSpike();
         isMoving = false;
         animator.SetBool("isMoving", false);
     }
 
-    private Collider2D GetRay(int x, int y)
+    private Collider2D GetRay(float x, float y, float dist = 0.3f)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(x, y, 0), 1, LayerMask.GetMask("Obstacle"));
-        //Debug.DrawRay(transform.position, new Vector3(x, y, 0), Color.red, 3f);
-        if(hit.collider != null)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(x, y, 0), new Vector3(x, y, 0), dist, LayerMask.GetMask("Obstacle"));
+        //Debug.DrawRay(transform.position + new Vector3(x, y, 0), new Vector3(x, y, 0) * dist, Color.red, 3f);
+        if (hit.collider != null)
         {
             //Debug.Log(hit.collider.name);
             return hit.collider;
         }
         return null;
+    }
+
+    private bool CheckObstacle(Collider2D collider, int x, int y)
+    {
+
+        switch (collider.gameObject.tag)
+        {
+            // 박스, 해골
+            case "Kickable":
+                GameManager.instance.UseTurn(1);
+                animator.SetTrigger("Kick");
+                collider.gameObject.GetComponent<Kickable>().Kick(x, y);
+
+                isMoving = false;
+                return true;
+            // 열쇠, 자물쇠
+            case "Key":
+                this.hasKey = true;
+                Destroy(collider.gameObject);
+                return false;
+            case "Lock":
+                if (!hasKey)
+                {
+                    GameManager.instance.UseTurn(1);
+                    animator.SetTrigger("Kick");
+                    isMoving = false;
+                    return true;
+                }
+                else
+                {
+                    this.hasKey = true;
+                    Destroy(collider.gameObject);
+                    return false;
+                }
+            // 송곳일경우
+            //case "Spike":
+            //    GameManager.instance.UseTurn(1);
+            //    Debug.Log("Spike");
+            //    return false;
+            default:
+                isMoving = false;
+                return true;
+        }
+    }
+
+    private void CheckSpike()
+    {
+        Vector2 currentPosition = transform.position;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(currentPosition, 0.1f);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Spike"))
+            {
+                GameManager.instance.UseTurn(1);
+                //Debug.Log("Spike.");
+            }
+        }
     }
 }

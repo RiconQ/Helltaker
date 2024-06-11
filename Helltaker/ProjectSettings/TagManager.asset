@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Kickable
+  - Key
+  - Lock
+  - Spike
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -41,4 +45,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 573404807
+    locked: 0
+  - name: Ground
+    uniqueID: 2029546121
+    locked: 0
+  - name: GroundObstacle
+    uniqueID: 4095627511
+    locked: 0
+  - name: Key
+    uniqueID: 2679566791
+    locked: 0
+  - name: Movable
+    uniqueID: 1333490697
     locked: 0
