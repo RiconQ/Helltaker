@@ -56,10 +56,14 @@ public class PlayerControl : MonoBehaviour
         if (collider != null)
             if (CheckObstacle(collider, x, y))
             {
+                if(!collider.gameObject.CompareTag("Wall"))
+                    TryGetManager();
                 CheckSpike();
+                
                 return;
             }
 
+        TryGetManager();
         GameManager.instance.UseTurn(1);
 
         animator.SetBool("isMoving", true);
@@ -110,16 +114,21 @@ public class PlayerControl : MonoBehaviour
                 animator.SetTrigger("Kick");
                 collider.gameObject.GetComponent<Kickable>().Kick(x, y);
 
+                //TryGetManager();
                 isMoving = false;
                 return true;
             // 열쇠, 자물쇠
             case "Key":
+                Debug.Log("Key");
+                //TryGetManager();
                 this.hasKey = true;
                 Destroy(collider.gameObject);
                 return false;
             case "Lock":
                 if (!hasKey)
                 {
+                    Debug.Log("not has key");
+                    //TryGetManager();
                     GameManager.instance.UseTurn(1);
                     animator.SetTrigger("Kick");
                     isMoving = false;
@@ -127,6 +136,8 @@ public class PlayerControl : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("has key");
+                    //TryGetManager();
                     this.hasKey = true;
                     Destroy(collider.gameObject);
                     return false;
@@ -152,9 +163,32 @@ public class PlayerControl : MonoBehaviour
         {
             if (collider.CompareTag("Spike"))
             {
-                GameManager.instance.UseTurn(1);
+
+                if (collider.gameObject.GetComponent<Spike>().GetIsSpike())
+                    GameManager.instance.UseTurn(1);
                 //Debug.Log("Spike.");
             }
+        }
+    }
+
+    private void TryGetManager()
+    {
+        try
+        {
+            SpikeManager.instance.ToggleSpike();
+        }
+        catch
+        {
+            Debug.Log("Not Found Spike Manager");
+        }
+
+        try
+        {
+            SkeletonManager.instance.CheckSkeletonSpike();
+        }
+        catch
+        {
+            Debug.Log("Not Found Skeleton Manager");
         }
     }
 }

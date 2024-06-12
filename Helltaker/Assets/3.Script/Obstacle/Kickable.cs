@@ -90,7 +90,7 @@ public class Kickable : MonoBehaviour
         }
         return null;
     }
-    private void CheckSpike()
+    public void CheckSpike()
     {
         Vector2 currentPosition = transform.position;
 
@@ -98,7 +98,7 @@ public class Kickable : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Spike"))
+            if (collider.CompareTag("Spike") && collider.gameObject.GetComponent<Spike>().GetIsSpike())
             {
                 Destroy(gameObject);
                 //Debug.Log("Spike.");

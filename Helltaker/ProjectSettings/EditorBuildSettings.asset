@@ -8,4 +8,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scene/Debug/Debug_Animation.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 1.unity
+    guid: 6cb3df6e0a2139f4688755780e6fa4dc
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 2.unity
+    guid: f57b4af7e4f60b54a8233ccd9bce438e
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 3.unity
+    guid: 52ce222ca909e9949b82271128f90712
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 4.unity
+    guid: 058fcab1497a15246acb614ba5f63ca8
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 5.unity
+    guid: abe31eb40a04ae54b88f46ca899c4014
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 6.unity
+    guid: 6803c5cd54c8a9444a90d65ca9001f49
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 7.unity
+    guid: eb861984610da2e429f3a6aeced0db19
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 8.unity
+    guid: cb468b03691614c498a1128395364f65
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 9.unity
+    guid: 2ddeed6151e03d54591c25a9696f956d
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 10_Boss.unity
+    guid: 4ccc133ace5ae344cadaf1273fb8c4e1
+  - enabled: 1
+    path: Assets/1.Scene/Level/Level 11_Home.unity
+    guid: df436aa8535e15640bcfbf1cb3510a51
   m_configObjects: {}
