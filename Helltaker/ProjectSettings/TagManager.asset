@@ -64,6 +64,12 @@ TagManager:
   - name: Interior
     uniqueID: 1087548389
     locked: 0
-  - name: UI
+  - name: BackUI
     uniqueID: 3426672579
+    locked: 0
+  - name: MiddleUI
+    uniqueID: 316269061
+    locked: 0
+  - name: FrontUI
+    uniqueID: 3727616497
     locked: 0

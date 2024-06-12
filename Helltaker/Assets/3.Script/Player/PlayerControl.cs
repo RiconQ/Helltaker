@@ -64,7 +64,7 @@ public class PlayerControl : MonoBehaviour
             }
 
         TryGetManager();
-        GameManager.instance.UseTurn(1);
+        if (!GameManager.instance.UseTurn(1)) return;
 
         animator.SetBool("isMoving", true);
         //transform.position += new Vector3(x, y, 0);
@@ -110,7 +110,7 @@ public class PlayerControl : MonoBehaviour
         {
             // 박스, 해골
             case "Kickable":
-                GameManager.instance.UseTurn(1);
+                if (!GameManager.instance.UseTurn(1)) return false;
                 animator.SetTrigger("Kick");
                 collider.gameObject.GetComponent<Kickable>().Kick(x, y);
 
@@ -129,7 +129,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     Debug.Log("not has key");
                     //TryGetManager();
-                    GameManager.instance.UseTurn(1);
+                    if (!GameManager.instance.UseTurn(1)) return false;
                     animator.SetTrigger("Kick");
                     isMoving = false;
                     return true;
