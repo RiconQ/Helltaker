@@ -9,7 +9,13 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        animator.gameObject.SetActive(true);
-        LevelManager.instance.SetNextLevelName(levelName);
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().SetIsMoving(true);
+        //GameManager.instance.usingTurn = false;
+
+        // 다이얼로그 출력
+        DialogueManager.instance.GetInteractionEvent();
+
+        //animator.gameObject.SetActive(true);
+        //LevelManager.instance.SetNextLevelName(levelName);
     }
 }

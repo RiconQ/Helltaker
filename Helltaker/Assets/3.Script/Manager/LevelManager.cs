@@ -33,8 +33,10 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private string levelName = " ";
 
-    public void SetNextLevelName(string levelName)
+    public void SetNextLevelName(string levelName = "null")
     {
+        if (levelName.Equals("null"))
+            levelName = SceneManager.GetActiveScene().name;
         this.levelName = levelName;
     }
 

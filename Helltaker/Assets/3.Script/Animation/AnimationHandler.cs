@@ -19,4 +19,9 @@ public class AnimationHandler : MonoBehaviour
     {
         GameManager.instance.RestartLevel();
     }
+
+    public void OnGetKey()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -20,13 +20,21 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        if (!isMoving)
+        if (!DialogueManager.instance.isDialogue)
         {
-            //Debug.Log(isMoving);
-            InputMove();
+            if (!isMoving)
+            {
+                //Debug.Log(isMoving);
+                InputMove();
+            }
         }
         //Debug.Log(isMoving);
     }
+
+    //public void SetIsMoving(bool value)
+    //{
+    //    isMoving = value;
+    //}
 
     private void InputMove()
     {
@@ -38,6 +46,10 @@ public class PlayerControl : MonoBehaviour
             Move(-1, 0);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             Move(1, 0);
+        else if (Input.GetKey(KeyCode.R))
+            GameManager.instance.RestartLevel();
+        // 다시 시작
+
         else return;
         // 무브가 끝나고 현재 위치에 가시가 있는지 확인 
         //CheckSpike();
@@ -56,10 +68,10 @@ public class PlayerControl : MonoBehaviour
         if (collider != null)
             if (CheckObstacle(collider, x, y))
             {
-                if(!collider.gameObject.CompareTag("Wall"))
+                if (!collider.gameObject.CompareTag("Wall"))
                     TryGetManager();
                 CheckSpike();
-                
+
                 return;
             }
 
@@ -122,7 +134,8 @@ public class PlayerControl : MonoBehaviour
                 Debug.Log("Key");
                 //TryGetManager();
                 this.hasKey = true;
-                Destroy(collider.gameObject);
+                collider.gameObject.GetComponent<Animator>().SetTrigger("GetKey");
+                //Destroy(collider.gameObject);
                 return false;
             case "Lock":
                 if (!hasKey)
@@ -139,7 +152,7 @@ public class PlayerControl : MonoBehaviour
                     Debug.Log("has key");
                     //TryGetManager();
                     this.hasKey = true;
-                    Destroy(collider.gameObject);
+                    collider.gameObject.GetComponent<Animator>().SetTrigger("GetKey");
                     return false;
                 }
             // 송곳일경우
@@ -179,7 +192,7 @@ public class PlayerControl : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Not Found Spike Manager");
+            //Debug.Log("Not Found Spike Manager");
         }
 
         try
@@ -188,7 +201,7 @@ public class PlayerControl : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Not Found Skeleton Manager");
+            //Debug.Log("Not Found Skeleton Manager");
         }
     }
 }

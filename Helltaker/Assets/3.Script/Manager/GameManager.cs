@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
+            Cursor.visible = false;
             instance = this;
             //DontDestroyOnLoad(this);
         }
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] private int remainTurn;
+    public bool usingTurn = true;
     
 
     public int RemainTurn
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public bool UseTurn(int turn)
     {
+        if (!usingTurn) return true;
         // 남은 턴 0에서 행동시 사망
         if (remainTurn == 0)
         {
