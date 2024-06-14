@@ -24,13 +24,17 @@ public class DialogueParser : MonoBehaviour
             List<string> eventNum = new List<string>();
             List<string> skipLine = new List<string>();
             List<string> showDeath = new List<string>();
-            
+            List<string> clearStage = new List<string>();
+            List<string> portrait = new List<string>();
+
             while(true)
             {
                 contextList.Add(row[2]);
                 eventNum.Add(row[3]);
                 skipLine.Add(row[4]);
                 showDeath.Add(row[5]);
+                clearStage.Add(row[6]);
+                portrait.Add(row[7]);
                 //Debug.Log(row[2]);
                 if (i + 1 < data.Length)
                 {
@@ -49,6 +53,9 @@ public class DialogueParser : MonoBehaviour
             dialogue.skipLine = skipLine.ToArray();
             dialogue.contexts = contextList.ToArray();
             dialogue.showDeath = showDeath.ToArray();
+            dialogue.clearStage = clearStage.ToArray();
+            dialogue.portrait = portrait.ToArray();
+
             dialogueList.Add(dialogue);
         }
 

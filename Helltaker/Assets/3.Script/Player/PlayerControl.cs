@@ -46,10 +46,13 @@ public class PlayerControl : MonoBehaviour
             Move(-1, 0);
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             Move(1, 0);
+        // 다시 시작
         else if (Input.GetKey(KeyCode.R))
             GameManager.instance.RestartLevel();
-        // 다시 시작
-
+        // 인생 조언
+        else if (Input.GetKey(KeyCode.L))
+            DialogueManager.instance.GetInteractionEvent(
+                GetComponent<InteractionEvent>());
         else return;
         // 무브가 끝나고 현재 위치에 가시가 있는지 확인 
         //CheckSpike();

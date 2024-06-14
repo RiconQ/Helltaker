@@ -20,6 +20,12 @@ public class Dialogue
     [Tooltip("사망 화면")]
     public string[] showDeath;
 
+    [Tooltip("스테이지 클리어 여부")]
+    public string[] clearStage;
+
+    [Tooltip("초상화")]
+    public string[] portrait;
+
 }
 
 [System.Serializable]

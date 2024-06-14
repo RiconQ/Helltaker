@@ -80,4 +80,10 @@ public class GameManager : MonoBehaviour
         LevelManager.instance.SetNextLevelName(SceneManager.GetActiveScene().name);
         fadeOutAnim.SetActive(true);
     }
+
+    public void NextLevel(string levelName)
+    {
+        LevelManager.instance.SetNextLevelName(levelName);
+        fadeOutAnim.SetActive(true);
+    }
 }

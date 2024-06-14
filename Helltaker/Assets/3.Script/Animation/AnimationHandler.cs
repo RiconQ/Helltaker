@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationHandler : MonoBehaviour
 {
-    
+
     public void OnEndFadeIn()
     {
         gameObject.SetActive(false);
@@ -23,5 +23,26 @@ public class AnimationHandler : MonoBehaviour
     public void OnGetKey()
     {
         Destroy(gameObject);
+    }
+
+    [SerializeField] private GameObject lucyFace;
+    [SerializeField] private GameObject[] Skel;
+    [SerializeField] private Goal LucyGoal;
+
+
+    public void MeetLucy()
+    {
+        lucyFace.SetActive(true);
+    }
+
+    public void ShowSkel(int index)
+    {
+        Skel[index].SetActive(true);
+    }
+
+    public void startLucyDialogue()
+    {
+        LucyGoal.StartDialogue();
+        transform.gameObject.SetActive(false);
     }
 }

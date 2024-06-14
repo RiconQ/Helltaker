@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,10 +28,15 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private GameObject deathUI;
+    [SerializeField] private GameObject clearUI;
     [SerializeField] private GameObject dialogueBG;
+    [SerializeField] private Image portrait;
 
     [SerializeField] private Animator fadeOutAnimator;
 
+    [SerializeField] private Sprite[] portraitArray;
+
+    private int lineX;
     private Dialogue[] dialogues;
     private EventSelect[] selects;
     public bool isDialogue = false; //대화중이면 true
@@ -44,7 +49,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject selectUI;
     [SerializeField] private Button[] selectBox;
 
-    [SerializeField] private int selectIndex = 0;
+    [SerializeField] private int eventID = -1;
+
+    public string nextLevelName;
 
     private void Start()
     {
@@ -60,16 +67,16 @@ public class DialogueManager : MonoBehaviour
             if (isNext)
             {
                 //Debug.Log("isNext True");
-                if (isSelect)
-                {
-                    //Debug.Log("isSelect True");
-                    //if(Input.GetKeyDown(KeyCode.UpArrow))
-                    //{
-                    //
-                    //}
-                    //else if(Input.GetKeyDown(K))
-                }
-                else
+                //if (isSelect)
+                //{
+                //    //Debug.Log("isSelect True");
+                //    //if(Input.GetKeyDown(KeyCode.UpArrow))
+                //    //{
+                //    //
+                //    //}
+                //    //else if(Input.GetKeyDown(K))
+                //}
+                if (!isSelect)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
@@ -77,8 +84,24 @@ public class DialogueManager : MonoBehaviour
                         txtDialogue.text = "";
                         txtName.text = "";
 
-                        // 베드 엔딩 선택지를 선택할 경우 -> 완성
-                        if (dialogues[lineCount].showDeath[0].Equals("TRUE"))
+                        Debug.Log($"line {lineCount}, context {contextCount}");
+
+                        // 베드 엔딩 선택지를 선택할 경우
+                        if (deathUI.activeSelf)
+                        {
+                            EndDialogue();
+                            return;
+                        }
+                        if (clearUI.activeSelf)
+                        {
+                            Debug.Log("Clear");
+                            EndDialogue();
+                            return;
+                        }
+
+                        // 베드 엔딩 선택지를 선택할 경우
+                        if (dialogues[lineCount].showDeath[0] != ("")
+                            && contextCount == dialogues[lineCount].contexts.Length - 2)
                         {
                             if (!deathUI.activeSelf)
                             {
@@ -88,21 +111,25 @@ public class DialogueManager : MonoBehaviour
                         }
 
                         // 선택지 있음.
-                        if (!dialogues[lineCount].eventNum[0].Equals(""))
+                        Debug.Log($"선택지 직전 {lineCount}, {contextCount}");
+                        //Debug.Log(dialogues[lineCount].eventNum.Length);
+                        int tmpEvent = dialogues[lineCount].eventNum.Length - 1;
+                        if (!dialogues[lineCount].eventNum[tmpEvent].Equals("") && contextCount == tmpEvent)
                         {
-                            ShowSelect(dialogues[lineCount].eventNum[0]);
+                            Debug.Log($"선택지 출현 {lineCount}, {contextCount}");
+                            //Debug.Log(dialogues[lineCount].eventNum[0]);
+                            ShowSelect(dialogues[lineCount].eventNum[tmpEvent]);
                             isSelect = true;
                             //contextCount -= 1;
                             isNext = true;
-                            selectIndex = 0;
+                            //selectIndex = 0;
                             SetDialogue();
-                            Debug.Log($"선택지 출현 {lineCount}, {contextCount}");
                             return;
                         }
                         if (contextCount + 1 < dialogues[lineCount].contexts.Length)
                         {
                             contextCount += 1;
-                            Debug.Log($"스킵 없음, 다음 Context : Line : {lineCount}  Context : {contextCount}");
+                            Debug.Log("스킵 없음, 다음 Context");
                             if (deathUI.activeSelf)
                                 SetDialogue(Color.red, false);
                             else
@@ -110,12 +137,22 @@ public class DialogueManager : MonoBehaviour
                         }
                         else
                         {
-                            contextCount = 0;
                             if (!dialogues[lineCount].skipLine[0].Equals(""))
                             {
-                                Debug.Log($"스킵 라인 있음 {dialogues[lineCount].skipLine[0]}");
-                                lineCount = int.Parse(dialogues[lineCount].skipLine[0]) + 1;
-                                Debug.Log(lineCount);
+                                Debug.Log($"스킵 라인 있음 {int.Parse(dialogues[lineCount].skipLine[0]) - lineX}");
+                                if (dialogues[lineCount].clearStage[0] != ""
+                                    && contextCount == dialogues[lineCount].contexts.Length - 1)
+                                {
+                                    contextCount = 0;
+                                    //contextCount -= 1;
+                                    SetDialogue();
+                                    if (!clearUI.activeSelf)
+                                        ShowClear();
+                                    isNext = true;
+                                    return;
+                                }
+                                lineCount = int.Parse(dialogues[lineCount].skipLine[0]) - lineX;
+                                //Debug.Log(lineCount);
                                 //if (lineCount + 1 < dialogues.Length)
                                 //{
                                 //    lineCount += 1;
@@ -125,7 +162,18 @@ public class DialogueManager : MonoBehaviour
                             if (lineCount + 1 < dialogues.Length)
                             {
                                 lineCount += 1;
-                                //Debug.Log($"스킵 없음, 다음 Line : Line : {lineCount}  Context : {contextCount}");
+                                contextCount = 0;
+                                Debug.Log($"스킵 없음, 다음 Line : Line : {lineCount}  Context : {contextCount}");
+                                if (dialogues[lineCount].clearStage[0] != ""
+                                    && contextCount == dialogues[lineCount].contexts.Length - 1)
+                                {
+                                    //contextCount -= 1;
+                                    SetDialogue();
+                                    if (!clearUI.activeSelf)
+                                        ShowClear();
+                                    isNext = true;
+                                    return;
+                                }
                                 if (deathUI.activeSelf)
                                     SetDialogue(Color.red);
                                 else
@@ -136,14 +184,32 @@ public class DialogueManager : MonoBehaviour
 
                                 //대화 종료
                                 // 대화 종료시 상황
-                                // 1. 게임 도중 -> 게임 다시 진행
-                                //EndDialogue();
+
                                 // 2. 스테이지 클리어 -> 다음 레벨로
+                                Debug.Log($"대화 끝 line : {lineCount}, context : {contextCount}");
+                                //Debug.Log($"대화 끝 {dialogues[lineCount].contexts.Length - 1}");
+                                //Debug.Log($"대화 끝 {(dialogues[lineCount].clearStage[0]!="")}");
+
+                                //int tmpClear = dialogues[lineCount].contexts.Length - 1;
+                                if (dialogues[lineCount].clearStage[0] != ""
+                                    && contextCount == dialogues[lineCount].contexts.Length - 1)
+                                {
+                                    //contextCount -= 1;
+                                    SetDialogue();
+                                    if (!clearUI.activeSelf)
+                                        ShowClear();
+                                    isNext = true;
+                                    return;
+                                }
+
                                 // 3. 스테이지 실패 -> 사망 컷신 후 레벨 재시작
                                 //ShowDeath();
 
+                                // 1. 게임 도중 -> 게임 다시 진행
+                                EndDialogue();
                             }
                         }
+
                     }
                 }
             }
@@ -151,10 +217,14 @@ public class DialogueManager : MonoBehaviour
     }
 
     //InteractionEvent에 Dialogue 할당
-    public void GetInteractionEvent()
+    public void GetInteractionEvent(InteractionEvent interactionEvent)
     {
-        ShowDialogue(transform.GetComponent<InteractionEvent>().GetDialogue());
-        selects = transform.GetComponent<InteractionEvent>().GetEventSelects();
+        portraitArray = interactionEvent.GetPortrait();
+        ShowDialogue(interactionEvent.GetDialogue());
+        selects = interactionEvent.GetEventSelects();
+        lineX = interactionEvent.GetLineX();
+        //ShowDialogue(GameObject.FindGameObjectWithTag("Goal").GetComponent<InteractionEvent>().GetDialogue());
+        //selects = GameObject.FindGameObjectWithTag("Goal").GetComponent<InteractionEvent>().GetEventSelects();
     }
 
     public void ShowDialogue(Dialogue[] p_dialogues)
@@ -176,8 +246,15 @@ public class DialogueManager : MonoBehaviour
     public void ShowSelect(string eventID)
     {
         Debug.Log($"eventID : {eventID}");
-        //Debug.Log($"select Length : {selects[FindSelectID(eventID)].select.Length}");
-        ShowSelectUI(selects[FindSelectID(eventID)].select.Length, true);
+        this.eventID = FindSelectID(eventID);
+        Debug.Log($"eventID : {this.eventID}");
+        Debug.Log($"select Length : {selects[this.eventID].select.Length}");
+
+        ShowSelectUI(selects[this.eventID].select.Length, true);
+        //for (int i = 0; i < selects[this.eventID].select.Length; i++)
+        //{
+        //    Debug.Log($"{selects[this.eventID].select[i]}, {selects[this.eventID].lineToMove[i]}");
+        //}
     }
     public int FindSelectID(string eventID)
     {
@@ -199,23 +276,24 @@ public class DialogueManager : MonoBehaviour
             selectBox[i].gameObject.SetActive(value);
             //Debug.Log("test : " + selects[0].select.Length);
             // Debug.Log(selectBox[i].TryGetComponent(out test));
+            int tmpIndex = dialogues[lineCount].eventNum.Length - 1;
             string tmp =
-                selects[FindSelectID(dialogues[lineCount].eventNum[0])].select[i];
+                selects[FindSelectID(dialogues[lineCount].eventNum[tmpIndex])].select[i];
             tmp.Replace('`', ',');
             tmp.Replace('|', '\n');
             selectBox[i].gameObject.GetComponentInChildren<Text>().text = tmp;
-            Debug.Log(i);
+            //Debug.Log(i);
         }
         for (int i = num; i < selectBox.Length; i++)
         {
-            selectBox[i].gameObject.SetActive(false);
+            if (selectBox[i].gameObject.activeSelf)
+                selectBox[i].gameObject.SetActive(false);
         }
         if (num != 3)
         {
             EventSystem.current.SetSelectedGameObject(selectBox[0].gameObject);
         }
     }
-
 
     private void SetDialogue(Color color = new Color(), bool showName = true)
     {
@@ -224,6 +302,23 @@ public class DialogueManager : MonoBehaviour
         string currDialogue = dialogues[lineCount].contexts[contextCount];
         currDialogue = currDialogue.Replace('`', ',');
         currDialogue = currDialogue.Replace('|', '\n');
+
+        //Debug.Log("Sprite : " + int.Parse(dialogues[lineCount].portrait[contextCount]));
+        if (int.Parse(dialogues[lineCount].portrait[contextCount]) != -1)
+        {
+            portrait.gameObject.SetActive(true);
+            Debug.Log($"image num : {int.Parse(dialogues[lineCount].portrait[contextCount])}");
+            try
+            {
+                Destroy(portrait.gameObject.GetComponent<Animator>());
+            }
+            catch { }
+            portrait.sprite = portraitArray[int.Parse(dialogues[lineCount].portrait[contextCount])];
+            portrait.SetNativeSize();
+        }
+        else
+            portrait.gameObject.SetActive(false);
+
 
         txtName.text = (showName == true) ? dialogues[lineCount].name : "";
         txtName.color = Color.red;
@@ -237,8 +332,15 @@ public class DialogueManager : MonoBehaviour
         // 선택지 잘못 선택하여 게임 오버된 거라면 
         if (deathUI.activeSelf)
         {
-            fadeOutAnimator.gameObject.SetActive(true);
-            LevelManager.instance.SetNextLevelName();
+            //fadeOutAnimator.gameObject.SetActive(true);
+            //LevelManager.instance.SetNextLevelName();
+            GameManager.instance.RestartLevel();
+        }
+
+        // 스테이지 클리어시
+        if (clearUI.activeSelf)
+        {
+            GameManager.instance.NextLevel(nextLevelName);
         }
 
         isDialogue = false;
@@ -250,7 +352,7 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    private void ToggleUI(bool value)
+    public void ToggleUI(bool value)
     {
         dialogueUI.SetActive(value);
     }
@@ -259,5 +361,19 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBG.SetActive(false);
         deathUI.SetActive(true);
+    }
+
+    private void ShowClear()
+    {
+        Debug.Log("ShowClear");
+        clearUI.SetActive(true);
+    }
+    public void ChoiceSelects(int index)
+    {
+        lineCount = int.Parse(selects[eventID].lineToMove[index]) - lineX;
+        Debug.Log($"lineX : {lineX}, line to move : " + (int.Parse(selects[eventID].lineToMove[index]) - lineX));
+        contextCount = -1;
+        ShowSelectUI(0);
+        isSelect = false;
     }
 }

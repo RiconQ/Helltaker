@@ -46,7 +46,7 @@ public class DatabaseManager : MonoBehaviour
             dialogueDic.Add(i + 1, dialogues[i]);
             //Debug.Log(i+1);
         }
-        Debug.Log("Parse Dialogue Done, dialogueDic : " + dialogueDic.Count);
+        //Debug.Log("Parse Dialogue Done, dialogueDic : " + dialogueDic.Count);
         isParseDialogueFinish = true;
     }
 
@@ -57,10 +57,10 @@ public class DatabaseManager : MonoBehaviour
 
         for (int i = 0; i < selects.Length; i++)
         {
-            Debug.Log($"Select Dic Add : {int.Parse(selects[i].ID)}");
+            //Debug.Log($"Select Dic Add : {int.Parse(selects[i].ID)}");
             selectDic.Add(int.Parse(selects[i].ID), selects[i]);
         }
-        Debug.Log("Parse Select Done, selectDic : " + selectDic.Count);
+        //Debug.Log("Parse Select Done, selectDic : " + selectDic.Count);
         isParseSelectFinish = true;
     }
 
