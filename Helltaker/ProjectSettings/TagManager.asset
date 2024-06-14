@@ -9,6 +9,7 @@ TagManager:
   - Lock
   - Spike
   - Wall
+  - Goal
   layers:
   - Default
   - TransparentFX
