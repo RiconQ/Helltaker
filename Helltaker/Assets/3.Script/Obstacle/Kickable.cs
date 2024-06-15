@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Kickable : MonoBehaviour
 {
@@ -8,16 +9,20 @@ public class Kickable : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private bool breakable = false;
 
+
     //breakable true라면 skelAnimator, renderer 할당
     private Animator skelAnimator;
     private SpriteRenderer renderer;
+    private AnimController animController;
 
     private void Awake()
     {
+        animController = GameObject.FindGameObjectWithTag("Player").GetComponent<AnimController>();
         if (breakable)
         {
             TryGetComponent(out skelAnimator);
             TryGetComponent(out renderer);
+
         }
     }
 
@@ -62,7 +67,10 @@ public class Kickable : MonoBehaviour
 
     private IEnumerator Move_co(Vector3 direction)
     {
+        // 현재 자리에 move animation 출력
         Vector3 startPosition = transform.position;
+        animController.ShowMoveFX(startPosition);
+
         Vector3 targetPosition = startPosition + direction;
         float elapsedTime = 0;
 

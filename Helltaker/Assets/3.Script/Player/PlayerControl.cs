@@ -6,16 +6,21 @@ public class PlayerControl : MonoBehaviour
 {
 
     [SerializeField] private float moveSpeed = 10f;
-    private bool isMoving = false;
-    private Animator animator;
-    private SpriteRenderer renderer;
-
     [SerializeField] private bool hasKey = false;
+    private bool isMoving = false;
+
+    private AnimController playerAnimator;
+    //private SpriteRenderer renderer;
+
+    //[SerializeField] private Animator runAnimator;
+    //private Animator animator;
+
 
     private void Awake()
     {
-        renderer = transform.GetComponent<SpriteRenderer>();
-        animator = transform.GetComponent<Animator>();
+        playerAnimator = GetComponent<AnimController>();
+        //renderer = transform.GetComponent<SpriteRenderer>();
+        //animator = transform.GetComponent<Animator>();
     }
 
     private void Update()
@@ -61,9 +66,9 @@ public class PlayerControl : MonoBehaviour
     private void Move(int x, int y)
     {
         if (x == -1)
-            renderer.flipX = true;
+            playerAnimator.FlipX(true);
         else if (x == 1)
-            renderer.flipX = false;
+            playerAnimator.FlipX(false);
 
         isMoving = true;
 
@@ -72,8 +77,10 @@ public class PlayerControl : MonoBehaviour
             if (CheckObstacle(collider, x, y))
             {
                 if (!collider.gameObject.CompareTag("Wall"))
+                {
                     TryGetManager();
-                CheckSpike();
+                    CheckSpike();
+                }
 
                 return;
             }
@@ -81,13 +88,17 @@ public class PlayerControl : MonoBehaviour
         TryGetManager();
         if (!GameManager.instance.UseTurn(1)) return;
 
-        animator.SetBool("isMoving", true);
+        playerAnimator.SetBoolPlayer("isMoving", true);
         //transform.position += new Vector3(x, y, 0);
 
         StartCoroutine(Move_co(new Vector3(x, y, 0)));
     }
     private IEnumerator Move_co(Vector3 direction)
     {
+        // 현재 위치에 이동하는 fx 소환
+        playerAnimator.ShowMoveFX(transform.position);
+
+
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = startPosition + direction;
         float elapsedTime = 0;
@@ -103,7 +114,7 @@ public class PlayerControl : MonoBehaviour
         //yield return new WaitForSeconds(0.2f);
         CheckSpike();
         isMoving = false;
-        animator.SetBool("isMoving", false);
+        playerAnimator.SetBoolPlayer("isMoving", false);
     }
 
     private Collider2D GetRay(float x, float y, float dist = 0.3f)
@@ -126,9 +137,9 @@ public class PlayerControl : MonoBehaviour
             // 박스, 해골
             case "Kickable":
                 if (!GameManager.instance.UseTurn(1)) return false;
-                animator.SetTrigger("Kick");
+                playerAnimator.SetTriggerPlayer("Kick");
+                playerAnimator.ShowHitFX(transform.position + new Vector3(x, y, 0));
                 collider.gameObject.GetComponent<Kickable>().Kick(x, y);
-
                 //TryGetManager();
                 isMoving = false;
                 return true;
@@ -146,7 +157,7 @@ public class PlayerControl : MonoBehaviour
                     Debug.Log("not has key");
                     //TryGetManager();
                     if (!GameManager.instance.UseTurn(1)) return false;
-                    animator.SetTrigger("Kick");
+                    playerAnimator.SetTriggerPlayer("Kick");
                     isMoving = false;
                     return true;
                 }
@@ -181,7 +192,10 @@ public class PlayerControl : MonoBehaviour
             {
 
                 if (collider.gameObject.GetComponent<Spike>().GetIsSpike())
+                {
+                    playerAnimator.ShowBloodFX(currentPosition);
                     GameManager.instance.UseTurn(1);
+                }
                 //Debug.Log("Spike.");
             }
         }

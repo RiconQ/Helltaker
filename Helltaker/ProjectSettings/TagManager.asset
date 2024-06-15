@@ -10,6 +10,7 @@ TagManager:
   - Spike
   - Wall
   - Goal
+  - FX
   layers:
   - Default
   - TransparentFX

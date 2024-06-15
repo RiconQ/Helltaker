@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1398964127}
   - component: {fileID: 458003868212717855}
   - component: {fileID: 6880215786920009280}
+  - component: {fileID: 3392041096453912009}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -144,7 +145,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!50 &458003868212717855
 Rigidbody2D:
@@ -186,3 +187,19 @@ MonoBehaviour:
   selectClass:
     line: {x: 0, y: 0}
     selects: []
+  portraits: []
+--- !u!114 &3392041096453912009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091134433714131455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3272c679301cf4195f481af390b51f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runAnimator: {fileID: 0}
+  bloodAnimator: {fileID: 0}
+  hitAnimator: {fileID: 0}
