@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationHandler : MonoBehaviour
 {
-    //°øÅë
+    //ï¿½ï¿½ï¿½ï¿½
 
     public void OnEndFadeIn()
         => gameObject.SetActive(false);
@@ -19,7 +19,7 @@ public class AnimationHandler : MonoBehaviour
         => Destroy(gameObject);
     
 
-    // ·ç½ÃÆÛ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private GameObject lucyFace;
     [SerializeField] private GameObject[] Skel;
     [SerializeField] private Goal LucyGoal;
