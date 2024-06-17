@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
 
         else
         {
-            Debug.Log("ÀÌ¹Ì ÀÌ °ÔÀÓ¿¡´Â DialogueManager Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ DialogueManager ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             Destroy(gameObject);
         }
     }
@@ -36,18 +36,20 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private Sprite[] portraitArray;
     [SerializeField] private Animator portraitAnimator;
-    [SerializeField] private AnimationClip[] portraitAnimations;
-    [SerializeField] private Sprite[] animThumnail;
+    //[SerializeField] private Animator portraitAnimator;
+    //[SerializeField] private AnimationClip[] portraitAnimations;
+    //[SerializeField] private Sprite[] animThumnail;
+    private string tmpName ="";
 
     private int lineX;
     private Dialogue[] dialogues;
     private EventSelect[] selects;
-    public bool isDialogue = false; //´ëÈ­ÁßÀÌ¸é true
-    private bool isNext = false; // Æ¯Á¤ Å° ÀÔ·Â ´ë±â
-    private bool isSelect = false; // ¼±ÅÃÁö ÀÖÀ» ½Ã Å° ÀÔ·Â ´ë±â
+    public bool isDialogue = false; //ï¿½ï¿½È­ï¿½ï¿½ï¿½Ì¸ï¿½ true
+    private bool isNext = false; // Æ¯ï¿½ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½
+    private bool isSelect = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½
 
-    private int lineCount; //´ëÈ­ ¶óÀÎ Ä«¿îÆ® -> csv¿¡¼­ ID
-    private int contextCount; //´ë»ç Ä«¿îÆ®
+    private int lineCount; //ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ® -> csvï¿½ï¿½ï¿½ï¿½ ID
+    private int contextCount; //ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®
 
     [SerializeField] private GameObject selectUI;
     [SerializeField] private Button[] selectBox;
@@ -56,7 +58,9 @@ public class DialogueManager : MonoBehaviour
 
     public string nextLevelName;
 
-    [SerializeField] private bool isBoss = false; // º¸½ºÀüÀÏ °æ¿ì ´ëÈ­ ³¡³ª¸é ´ÙÀ½ ¾ÀÀ¸·Î
+    [SerializeField] private bool isBoss = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\
+    [SerializeField] private bool isLucy = false;
+    [SerializeField] private GameObject lucyObj;
 
     private void Start()
     {
@@ -91,7 +95,7 @@ public class DialogueManager : MonoBehaviour
 
                         Debug.Log($"line {lineCount}, context {contextCount}");
 
-                        // º£µå ¿£µù ¼±ÅÃÁö¸¦ ¼±ÅÃÇÒ °æ¿ì
+                        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                         if (deathUI.activeSelf)
                         {
                             EndDialogue();
@@ -104,7 +108,7 @@ public class DialogueManager : MonoBehaviour
                             return;
                         }
 
-                        // º£µå ¿£µù ¼±ÅÃÁö¸¦ ¼±ÅÃÇÒ °æ¿ì
+                        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                         if (dialogues[lineCount].showDeath[0] != ("")
                             && contextCount == dialogues[lineCount].contexts.Length - 2)
                         {
@@ -115,13 +119,13 @@ public class DialogueManager : MonoBehaviour
                             }
                         }
 
-                        // ¼±ÅÃÁö ÀÖÀ½.
-                        Debug.Log($"¼±ÅÃÁö Á÷Àü {lineCount}, {contextCount}");
+                        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+                        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ {lineCount}, {contextCount}");
                         //Debug.Log(dialogues[lineCount].eventNum.Length);
                         int tmpEvent = dialogues[lineCount].eventNum.Length - 1;
                         if (!dialogues[lineCount].eventNum[tmpEvent].Equals("") && contextCount == tmpEvent)
                         {
-                            Debug.Log($"¼±ÅÃÁö ÃâÇö {lineCount}, {contextCount}");
+                            Debug.Log($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ {lineCount}, {contextCount}");
                             //Debug.Log(dialogues[lineCount].eventNum[0]);
                             ShowSelect(dialogues[lineCount].eventNum[tmpEvent]);
                             isSelect = true;
@@ -134,7 +138,7 @@ public class DialogueManager : MonoBehaviour
                         if (contextCount + 1 < dialogues[lineCount].contexts.Length)
                         {
                             contextCount += 1;
-                            Debug.Log("½ºÅµ ¾øÀ½, ´ÙÀ½ Context");
+                            Debug.Log("ï¿½ï¿½Åµ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ Context");
                             if (deathUI.activeSelf)
                                 SetDialogue(Color.red, false);
                             else
@@ -144,7 +148,7 @@ public class DialogueManager : MonoBehaviour
                         {
                             if (!dialogues[lineCount].skipLine[0].Equals(""))
                             {
-                                Debug.Log($"½ºÅµ ¶óÀÎ ÀÖÀ½ {int.Parse(dialogues[lineCount].skipLine[0]) - lineX}");
+                                Debug.Log($"ï¿½ï¿½Åµ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ {int.Parse(dialogues[lineCount].skipLine[0]) - lineX}");
                                 if (dialogues[lineCount].clearStage[0] != ""
                                     && contextCount == dialogues[lineCount].contexts.Length - 1)
                                 {
@@ -168,7 +172,7 @@ public class DialogueManager : MonoBehaviour
                             {
                                 lineCount += 1;
                                 contextCount = 0;
-                                Debug.Log($"½ºÅµ ¾øÀ½, ´ÙÀ½ Line : Line : {lineCount}  Context : {contextCount}");
+                                Debug.Log($"ï¿½ï¿½Åµ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ Line : Line : {lineCount}  Context : {contextCount}");
                                 if (dialogues[lineCount].clearStage[0] != ""
                                     && contextCount == dialogues[lineCount].contexts.Length - 1)
                                 {
@@ -187,13 +191,13 @@ public class DialogueManager : MonoBehaviour
                             else
                             {
 
-                                //´ëÈ­ Á¾·á
-                                // ´ëÈ­ Á¾·á½Ã »óÈ²
+                                //ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½
+                                // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²
 
-                                // 2. ½ºÅ×ÀÌÁö Å¬¸®¾î -> ´ÙÀ½ ·¹º§·Î
-                                Debug.Log($"´ëÈ­ ³¡ line : {lineCount}, context : {contextCount}");
-                                //Debug.Log($"´ëÈ­ ³¡ {dialogues[lineCount].contexts.Length - 1}");
-                                //Debug.Log($"´ëÈ­ ³¡ {(dialogues[lineCount].clearStage[0]!="")}");
+                                // 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                                Debug.Log($"ï¿½ï¿½È­ ï¿½ï¿½ line : {lineCount}, context : {contextCount}");
+                                //Debug.Log($"ï¿½ï¿½È­ ï¿½ï¿½ {dialogues[lineCount].contexts.Length - 1}");
+                                //Debug.Log($"ï¿½ï¿½È­ ï¿½ï¿½ {(dialogues[lineCount].clearStage[0]!="")}");
 
                                 //int tmpClear = dialogues[lineCount].contexts.Length - 1;
                                 if (dialogues[lineCount].clearStage[0] != ""
@@ -207,10 +211,10 @@ public class DialogueManager : MonoBehaviour
                                     return;
                                 }
 
-                                // 3. ½ºÅ×ÀÌÁö ½ÇÆĞ -> »ç¸Á ÄÆ½Å ÈÄ ·¹º§ Àç½ÃÀÛ
+                                // 3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ ï¿½Æ½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
                                 //ShowDeath();
 
-                                // 1. °ÔÀÓ µµÁß -> °ÔÀÓ ´Ù½Ã ÁøÇà
+                                // 1. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
                                 if (isBoss)
                                 {
                                     GameManager.instance.NextLevel(nextLevelName);
@@ -225,7 +229,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    //InteractionEvent¿¡ Dialogue ÇÒ´ç
+    //InteractionEventï¿½ï¿½ Dialogue ï¿½Ò´ï¿½
     public void GetInteractionEvent(InteractionEvent interactionEvent)
     {
         portraitArray = interactionEvent.GetPortrait();
@@ -275,7 +279,7 @@ public class DialogueManager : MonoBehaviour
         return -1;
     }
 
-    // ¾Æ¹« ¸Å°³ º¯¼ö ¾È°Ç³×ÁÖ¸é ÀüºÎ´Ù SetActive false;
+    // ï¿½Æ¹ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È°Ç³ï¿½ï¿½Ö¸ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ SetActive false;
     private void ShowSelectUI(int num = 3, bool value = false)
     {
         selectUI.SetActive(value);
@@ -315,11 +319,18 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log("Sprite : " + int.Parse(dialogues[lineCount].portrait[contextCount]));
         if (int.Parse(dialogues[lineCount].portrait[contextCount]) != -1)
         {
+            if (dialogues[lineCount].name != tmpName)
+            {
+                Debug.Log($"prev name {tmpName}, curr name {dialogues[lineCount].name}");
+                tmpName = dialogues[lineCount].name;
+                portrait.gameObject.SetActive(false);
+                portrait.gameObject.SetActive(true);
+            }
             portrait.gameObject.SetActive(true);
             Debug.Log($"image num : {int.Parse(dialogues[lineCount].portrait[contextCount])}");
             try
             {
-                Destroy(portrait.gameObject.GetComponent<Animator>());
+                //Destroy(portrait.gameObject.GetComponent<Animator>());
             }
             catch { }
             portrait.sprite = portraitArray[int.Parse(dialogues[lineCount].portrait[contextCount])];
@@ -327,26 +338,43 @@ public class DialogueManager : MonoBehaviour
         }
         else
             portrait.gameObject.SetActive(false);
-        if (dialogues[lineCount].animation[contextCount] != "")
-        {
-            int index = int.Parse(dialogues[lineCount].animation[contextCount]);
-            //portraitAnimator.gameObject.GetComponent<Image>().enabled = true;
-            //portraitAnimator.gameObject.SetActive(true);
-            portraitAnimator.enabled = true;
-            portraitAnimator.gameObject.GetComponent<Image>().sprite = animThumnail[index];
-            portraitAnimator.gameObject.GetComponent<Image>().SetNativeSize();
-            portraitAnimator.Play(portraitAnimations[index].name);
-        }
-        else
-        {
-            //portraitAnimator.enabled = false;
-            portraitAnimator.gameObject.GetComponent<Image>().enabled = false;
-
-        }
+        #region
+        //if (dialogues[lineCount].animation[contextCount] != "")
+        //{
+        //    int index = int.Parse(dialogues[lineCount].animation[contextCount]);
+        //    //portraitAnimator.gameObject.GetComponent<Image>().enabled = true;
+        //    //portraitAnimator.gameObject.SetActive(true);
+        //    portraitAnimator.enabled = true;
+        //    portraitAnimator.gameObject.GetComponent<Image>().sprite = animThumnail[index];
+        //    portraitAnimator.gameObject.GetComponent<Image>().SetNativeSize();
+        //    portraitAnimator.Play(portraitAnimations[index].name);
+        //}
+        //else
+        //{
+        //    //portraitAnimator.enabled = false;
+        //    portraitAnimator.gameObject.GetComponent<Image>().enabled = false;
+        //
+        //}
         //portraitAnimator.gameObject.SetActive(false);
 
 
-
+        //if(showName == true)
+        //{
+        //    if(!txtName.text.Equals(dialogues[lineCount].name))
+        //    {
+        //        //ì´ë¦„ ë‹¤ë¦„. ì• ë‹ˆë©”ì´ì…˜ ì¶œë ¥
+        //        Debug.Log($"prev name {txtName.text}, curr name {dialogues[lineCount].name}");
+        //        portraitAnimator.Play("PortraitFadeIn");
+        //    }
+        //    txtName.text = dialogues[lineCount].name;
+        //}
+        //else
+        //{
+        //    txtName.text = "";
+        //}
+        #endregion
+        //portraitAnimator.Play("PortraitFadeIn");
+        //Debug.Log($"prev name {txtName.text}, curr name {dialogues[lineCount].name}");
         txtName.text = (showName == true) ? dialogues[lineCount].name : "";
         txtName.color = Color.red;
         txtDialogue.text = currDialogue;
@@ -356,18 +384,22 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        // ¼±ÅÃÁö Àß¸ø ¼±ÅÃÇÏ¿© °ÔÀÓ ¿À¹öµÈ °Å¶ó¸é 
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¶ï¿½ï¿½ 
         if (deathUI.activeSelf)
         {
+            if (isLucy) lucyObj.SetActive(false);
             //fadeOutAnimator.gameObject.SetActive(true);
             //LevelManager.instance.SetNextLevelName();
             GameManager.instance.RestartLevel();
         }
 
-        // ½ºÅ×ÀÌÁö Å¬¸®¾î½Ã
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½
         if (clearUI.activeSelf)
         {
-            GameManager.instance.NextLevel(nextLevelName);
+            if (isLucy) lucyObj.SetActive(false);
+            clearUI.SetActive(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().Play("Victory");
+            //GameManager.instance.NextLevel(nextLevelName);
         }
 
         isDialogue = false;
@@ -387,7 +419,9 @@ public class DialogueManager : MonoBehaviour
     private void ShowDeath()
     {
         dialogueBG.SetActive(false);
+        if (isLucy) lucyObj.SetActive(false);
         deathUI.SetActive(true);
+        CameraShakeManager.instance.Shake();
     }
 
     private void ShowClear()

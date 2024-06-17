@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 458003868212717855}
   - component: {fileID: 6880215786920009280}
   - component: {fileID: 3392041096453912009}
+  - component: {fileID: 6465120445858016720}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -121,6 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   hasKey: 0
+  hasAdvice: 1
+  isBoss: 0
 --- !u!61 &1398964127
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -203,3 +206,18 @@ MonoBehaviour:
   runAnimator: {fileID: 0}
   bloodAnimator: {fileID: 0}
   hitAnimator: {fileID: 0}
+--- !u!114 &6465120445858016720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091134433714131455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae70c3e61c1a7e143adc100fb7f73abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lucyFace: {fileID: 0}
+  Skel: []
+  LucyGoal: {fileID: 0}

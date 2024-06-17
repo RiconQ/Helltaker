@@ -5,29 +5,29 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    [Tooltip("Ä³¸¯ÅÍ ÀÌ¸§")]
+    [Tooltip("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½")]
     public string name;
 
-    [Tooltip("´ë»ç ³»¿ë")]
+    [Tooltip("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     public string[] contexts;
 
-    [Tooltip("ÀÌº¥Æ® ¹øÈ£")]
+    [Tooltip("ï¿½Ìºï¿½Æ® ï¿½ï¿½È£")]
     public string[] eventNum;
 
-    [Tooltip("½ºÅµ ¶óÀÎ")]
+    [Tooltip("ï¿½ï¿½Åµ ï¿½ï¿½ï¿½ï¿½")]
     public string[] skipLine;
 
-    [Tooltip("»ç¸Á È­¸é")]
+    [Tooltip("ï¿½ï¿½ï¿½ È­ï¿½ï¿½")]
     public string[] showDeath;
 
-    [Tooltip("½ºÅ×ÀÌÁö Å¬¸®¾î ¿©ºÎ")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     public string[] clearStage;
 
-    [Tooltip("ÃÊ»óÈ­")]
+    [Tooltip("ï¿½Ê»ï¿½È­")]
     public string[] portrait;
 
-    [Tooltip("¾Ö´Ï¸ÞÀÌ¼Ç")]
-    public string[] animation;
+    //[Tooltip("ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½")]
+    //public string[] animation;
 }
 
 [System.Serializable]
@@ -45,10 +45,10 @@ public class EventSelect
     // ID
     public string ID;
 
-    // ¼±ÅÃÁö ´ëÈ­
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­
     public string[] select;
 
-    // ¼±ÅÃÁö ÀÌµ¿ ¶óÀÎ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
     public string[] lineToMove;
 }
 

@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 56
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 56
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -172,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: cbc68abcef3bdd14d9ecd567f84b9b69, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -242,11 +242,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 58
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 58
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -266,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: addaea1b0233271429a9c755e8b52a88, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -466,11 +466,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 60
+      value: 98
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 60
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -486,7 +486,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e932b9cc8bf82ba4eafc6943500dbc48, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -556,11 +556,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 61
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 61
+      value: 107
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8a8e8f8d2f0675c4280f4c8ff18ca272, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -1003,11 +1003,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 58
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 58
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -1027,7 +1027,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: addaea1b0233271429a9c755e8b52a88, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -2154,11 +2154,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 61
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 61
+      value: 107
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -2178,7 +2178,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8a8e8f8d2f0675c4280f4c8ff18ca272, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -2252,7 +2252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 53
+      value: 57
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -2280,7 +2280,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8721488764a5ebd4d9fe913e76f719ae, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -2594,11 +2594,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 57
+      value: 81
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 57
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -2622,7 +2622,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 63b95191c8bcdaa4eb75e0dfeb5bced7, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -2915,11 +2915,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 59
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 59
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -2939,7 +2939,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 6f83ea174e2338e4d819679cd330d4a1, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -3157,6 +3157,10 @@ PrefabInstance:
       propertyPath: fadeOutAnimator
       value: 
       objectReference: {fileID: 530702464}
+    - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
+      propertyPath: portraitAnimator
+      value: 
+      objectReference: {fileID: 1485678516}
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: selectBox.Array.data[0]
       value: 
@@ -3696,6 +3700,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1485678516 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8872360961536016141, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
+  m_PrefabInstance: {fileID: 1404607015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1489917060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3709,11 +3718,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 54
+      value: 58
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 54
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -3733,7 +3742,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 79280129015723c4595ffbb8de6efe88, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -4408,11 +4417,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 57
+      value: 81
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 57
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -4436,7 +4445,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 63b95191c8bcdaa4eb75e0dfeb5bced7, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -4558,11 +4567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 55
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 55
+      value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -4594,7 +4603,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: a8c7bce653d4fdc40b817d2977eac734, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -4664,11 +4673,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 56
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 56
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.size
@@ -4704,7 +4713,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: cbc68abcef3bdd14d9ecd567f84b9b69, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name

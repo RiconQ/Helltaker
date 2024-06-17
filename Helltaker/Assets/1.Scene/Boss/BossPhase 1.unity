@@ -15459,8 +15459,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     name: 
-    line: {x: 62, y: 62}
+    line: {x: 108, y: 113}
     dialogues:
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
     - name: 
       contexts: []
       eventNum: []
@@ -15504,6 +15539,7 @@ GameObject:
   - component: {fileID: 8214275359647203770}
   - component: {fileID: 8591359591140538096}
   - component: {fileID: 836998152445734049}
+  - component: {fileID: 3585959637640466213}
   m_Layer: 5
   m_Name: Portrait
   m_TagString: Untagged
@@ -15511,6 +15547,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &3585959637640466213
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3585959637640466212}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f599fa57b52db9419a1077ab6aa82d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!224 &3611454473447247002
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17345,7 +17400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &9091134434702183696
 MonoBehaviour:
   m_ObjectHideFlags: 0

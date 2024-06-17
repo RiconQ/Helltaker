@@ -26,7 +26,10 @@ public class AnimationHandler : MonoBehaviour
 
 
     public void MeetLucy()
-        => lucyFace.SetActive(true);
+    {
+        lucyFace.SetActive(true);
+        GetComponent<Animator>().enabled = false;
+    }
 
     public void ShowSkel(int index)
         => Skel[index].SetActive(true);
@@ -39,4 +42,7 @@ public class AnimationHandler : MonoBehaviour
 
     public void HideFX()
         => this.gameObject.SetActive(false);
+
+    public void Victory()
+        => GameManager.instance.NextLevel(DialogueManager.instance.nextLevelName);
 }

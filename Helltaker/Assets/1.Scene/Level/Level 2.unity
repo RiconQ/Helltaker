@@ -1090,6 +1090,7 @@ GameObject:
   - component: {fileID: 824498877}
   - component: {fileID: 824498876}
   - component: {fileID: 824498875}
+  - component: {fileID: 824498878}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1162,6 +1163,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &824498878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824498874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cae630c72605d49843005b11cb3d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: 0.1
+  shakeTime: 0.1
 --- !u!1001 &840098057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2702,6 +2717,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7108619031126926435, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7108619031141317710, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}
       propertyPath: m_Name
       value: Scene
@@ -2749,6 +2768,18 @@ PrefabInstance:
     - target: {fileID: 7108619031141317711, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108619032482889028, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}
+      propertyPath: m_Color.b
+      value: 0.10588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108619032482889028, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}
+      propertyPath: m_Color.g
+      value: 0.011764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108619032482889028, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}
+      propertyPath: m_Color.r
+      value: 0.007843138
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}

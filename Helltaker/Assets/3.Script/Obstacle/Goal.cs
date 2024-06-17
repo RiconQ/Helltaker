@@ -16,7 +16,7 @@ public class Goal : MonoBehaviour
         //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().SetIsMoving(true);
         //GameManager.instance.usingTurn = false;
 
-        //·ç½Ã ¾Ö´Ï¸ÞÀÌ¼Ç Àü¿ë
+        //ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (isLucy)
         {
             DialogueManager.instance.ToggleUI(true);
@@ -30,7 +30,7 @@ public class Goal : MonoBehaviour
 
         else
         {
-            // ´ÙÀÌ¾ó·Î±× Ãâ·Â
+            // ï¿½ï¿½ï¿½Ì¾ï¿½Î±ï¿½ ï¿½ï¿½ï¿½
             StartDialogue();
 
         }

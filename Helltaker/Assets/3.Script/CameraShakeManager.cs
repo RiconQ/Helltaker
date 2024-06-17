@@ -16,13 +16,13 @@ public class CameraShakeManager : MonoBehaviour
 
         else
         {
-            Debug.Log("ÀÌ¹Ì ÀÌ °ÔÀÓ¿¡´Â CameraShakeManager Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ CameraShakeManager ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             Destroy(gameObject);
         }
     }
 
-    [SerializeField] public float shakeAmount = 0.1f;
-    [SerializeField] public float shakeTime = 0.1f;
+    public float shakeAmount = 0.1f;
+    public float shakeTime = 0.2f;
 
     public void Shake()
     {

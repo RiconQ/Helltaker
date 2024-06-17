@@ -15475,8 +15475,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     name: 
-    line: {x: 63, y: 63}
+    line: {x: 114, y: 119}
     dialogues:
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
+    - name: 
+      contexts: []
+      eventNum: []
+      skipLine: []
+      showDeath: []
+      clearStage: []
+      portrait: []
     - name: 
       contexts: []
       eventNum: []

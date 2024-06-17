@@ -223,6 +223,7 @@ public class PlayerControl : MonoBehaviour
                 if (collider.gameObject.GetComponent<Spike>().GetIsSpike())
                 {
                     playerAnimator.ShowBloodFX(currentPosition);
+                    CameraShakeManager.instance.Shake();
                     GameManager.instance.UseTurn(1);
                 }
                 //Debug.Log("Spike.");

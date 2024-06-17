@@ -20,7 +20,7 @@ public class DatabaseManager : MonoBehaviour
 
         else
         {
-            Debug.Log("ÀÌ¹Ì ÀÌ °ÔÀÓ¿¡´Â DatabaseManager Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ DatabaseManager ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             Destroy(gameObject);
         }
     }

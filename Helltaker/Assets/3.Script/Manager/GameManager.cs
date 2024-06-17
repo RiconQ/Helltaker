@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
         else
         {
-            Debug.Log("ÀÌ¹Ì ÀÌ °ÔÀÓ¿¡´Â °ÔÀÓ ¸Å´ÏÀú°¡ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             Destroy(gameObject);
         }
     }
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     public bool UseTurn(int turn)
     {
         if (!usingTurn) return true;
-        // ³²Àº ÅÏ 0¿¡¼­ Çàµ¿½Ã »ç¸Á
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (remainTurn == 0)
         {
             OnDie();
@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
     public void OnDie()
     {
         Debug.Log("Die");
+        CameraShakeManager.instance.shakeTime = 1.0f;
+        CameraShakeManager.instance.Shake();
         deathAnim.transform.position = playerObj.transform.position;
         deathAnim.SetActive(true);
     }

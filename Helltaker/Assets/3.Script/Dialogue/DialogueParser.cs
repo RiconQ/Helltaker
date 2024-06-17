@@ -26,7 +26,7 @@ public class DialogueParser : MonoBehaviour
             List<string> showDeath = new List<string>();
             List<string> clearStage = new List<string>();
             List<string> portrait = new List<string>();
-            List<string> animation = new List<string>();
+            //List<string> animation = new List<string>();
 
             while(true)
             {
@@ -36,7 +36,7 @@ public class DialogueParser : MonoBehaviour
                 showDeath.Add(row[5]);
                 clearStage.Add(row[6]);
                 portrait.Add(row[7]);
-                animation.Add(row[8]);
+                //animation.Add(row[8]);
                 //Debug.Log(row[2]);
                 if (i + 1 < data.Length)
                 {
@@ -57,7 +57,7 @@ public class DialogueParser : MonoBehaviour
             dialogue.showDeath = showDeath.ToArray();
             dialogue.clearStage = clearStage.ToArray();
             dialogue.portrait = portrait.ToArray();
-            dialogue.animation = animation.ToArray();
+            //dialogue.animation = animation.ToArray();
 
             dialogueList.Add(dialogue);
         }

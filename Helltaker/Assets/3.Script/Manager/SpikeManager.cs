@@ -16,7 +16,7 @@ public class SpikeManager : MonoBehaviour
 
         else
         {
-            Debug.Log("ÀÌ¹Ì ÀÌ °ÔÀÓ¿¡´Â Spike ¸Å´ÏÀú°¡ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.Log("ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ Spike ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
             Destroy(gameObject);
         }
     }
