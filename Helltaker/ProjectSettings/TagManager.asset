@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Goal
   - FX
+  - BossChain
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Obstacle
   - Water
   - UI
-  - 
+  - BossObstacle
   - 
   - 
   - 

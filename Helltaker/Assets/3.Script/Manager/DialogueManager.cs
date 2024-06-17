@@ -35,6 +35,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator fadeOutAnimator;
 
     [SerializeField] private Sprite[] portraitArray;
+    [SerializeField] private Animator portraitAnimator;
+    [SerializeField] private AnimationClip[] portraitAnimations;
+    [SerializeField] private Sprite[] animThumnail;
 
     private int lineX;
     private Dialogue[] dialogues;
@@ -52,6 +55,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private int eventID = -1;
 
     public string nextLevelName;
+
+    [SerializeField] private bool isBoss = false; // 보스전일 경우 대화 끝나면 다음 씬으로
 
     private void Start()
     {
@@ -206,6 +211,10 @@ public class DialogueManager : MonoBehaviour
                                 //ShowDeath();
 
                                 // 1. 게임 도중 -> 게임 다시 진행
+                                if (isBoss)
+                                {
+                                    GameManager.instance.NextLevel(nextLevelName);
+                                }
                                 EndDialogue();
                             }
                         }
@@ -318,6 +327,24 @@ public class DialogueManager : MonoBehaviour
         }
         else
             portrait.gameObject.SetActive(false);
+        if (dialogues[lineCount].animation[contextCount] != "")
+        {
+            int index = int.Parse(dialogues[lineCount].animation[contextCount]);
+            //portraitAnimator.gameObject.GetComponent<Image>().enabled = true;
+            //portraitAnimator.gameObject.SetActive(true);
+            portraitAnimator.enabled = true;
+            portraitAnimator.gameObject.GetComponent<Image>().sprite = animThumnail[index];
+            portraitAnimator.gameObject.GetComponent<Image>().SetNativeSize();
+            portraitAnimator.Play(portraitAnimations[index].name);
+        }
+        else
+        {
+            //portraitAnimator.enabled = false;
+            portraitAnimator.gameObject.GetComponent<Image>().enabled = false;
+
+        }
+        //portraitAnimator.gameObject.SetActive(false);
+
 
 
         txtName.text = (showName == true) ? dialogues[lineCount].name : "";

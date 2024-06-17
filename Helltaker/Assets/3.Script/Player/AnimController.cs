@@ -37,7 +37,7 @@ public class AnimController : MonoBehaviour
 
     public void ShowMoveFX(Vector3 position)
     {
-        Debug.Log("MoveFX");
+        //Debug.Log("MoveFX");
         runAnimator.transform.position = position;
         runAnimator.gameObject.SetActive(true);
         int randomIndex = Random.Range(0, 3);

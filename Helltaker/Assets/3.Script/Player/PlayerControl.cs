@@ -8,6 +8,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private bool hasKey = false;
     private bool isMoving = false;
+    [SerializeField] private bool hasAdvice = true;
+    [SerializeField] private bool isBoss = false;
 
     private AnimController playerAnimator;
     //private SpriteRenderer renderer;
@@ -36,10 +38,10 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(isMoving);
     }
 
-    //public void SetIsMoving(bool value)
-    //{
-    //    isMoving = value;
-    //}
+    public void SetIsMoving(bool value)
+    {
+        isMoving = value;
+    }
 
     private void InputMove()
     {
@@ -55,7 +57,7 @@ public class PlayerControl : MonoBehaviour
         else if (Input.GetKey(KeyCode.R))
             GameManager.instance.RestartLevel();
         // 인생 조언
-        else if (Input.GetKey(KeyCode.L))
+        else if (Input.GetKey(KeyCode.L) && hasAdvice)
             DialogueManager.instance.GetInteractionEvent(
                 GetComponent<InteractionEvent>());
         else return;
@@ -71,11 +73,20 @@ public class PlayerControl : MonoBehaviour
             playerAnimator.FlipX(false);
 
         isMoving = true;
+        Collider2D collider;
+        if (!isBoss)
+            collider = GetRay(x, y);
+        else
+            collider = GetBossRay(x, y);
 
-        Collider2D collider = GetRay(x, y);
         if (collider != null)
             if (CheckObstacle(collider, x, y))
             {
+                if(collider.gameObject.CompareTag("BossChain"))
+                {
+                    collider.gameObject.GetComponent<BossChain>().KickChain();
+                    Debug.Log("Boss Chain");
+                }
                 if (!collider.gameObject.CompareTag("Wall"))
                 {
                     TryGetManager();
@@ -106,11 +117,12 @@ public class PlayerControl : MonoBehaviour
         while (elapsedTime < 1.0f)
         {
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime);
-            elapsedTime += Time.deltaTime * moveSpeed;
-            yield return null;
+            elapsedTime += 0.01f * moveSpeed;
+            yield return new WaitForSeconds(0.01f);
         }
-
-        transform.position = targetPosition;
+        Vector3 roundPosition = new Vector3(Mathf.Round(targetPosition.x * 2) / 2.0f, Mathf.Round(targetPosition.y * 2) / 2.0f, 0);
+        transform.position = roundPosition;
+        //transform.position = targetPosition;
         //yield return new WaitForSeconds(0.2f);
         CheckSpike();
         isMoving = false;
@@ -123,11 +135,23 @@ public class PlayerControl : MonoBehaviour
         //Debug.DrawRay(transform.position + new Vector3(x, y, 0), new Vector3(x, y, 0) * dist, Color.red, 3f);
         if (hit.collider != null)
         {
-            //Debug.Log(hit.collider.name);
+           // Debug.Log(hit.collider.name);
             return hit.collider;
         }
         return null;
     }
+    private Collider2D GetBossRay(float x, float y, float dist = 0.3f)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(x, y, 0), new Vector3(x, y, 0), dist, LayerMask.GetMask("BossObstacle"));
+        //Debug.DrawRay(transform.position + new Vector3(x, y, 0), new Vector3(x, y, 0) * dist, Color.red, 3f);
+        if (hit.collider != null)
+        {
+            //Debug.Log(hit.collider.name);
+            return hit.collider;
+        }
+        return GetRay(x, y);
+    }
+
 
     private bool CheckObstacle(Collider2D collider, int x, int y)
     {
@@ -174,6 +198,11 @@ public class PlayerControl : MonoBehaviour
             //    GameManager.instance.UseTurn(1);
             //    Debug.Log("Spike");
             //    return false;
+            case "BossChain":
+                playerAnimator.SetTriggerPlayer("Kick");
+                playerAnimator.ShowHitFX(transform.position + new Vector3(x, y, 0));
+                isMoving = false;
+                return true;
             default:
                 isMoving = false;
                 return true;

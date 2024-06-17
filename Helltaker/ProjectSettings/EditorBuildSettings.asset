@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/1.Scene/Debug/Debug_Animation.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/1.Scene/Level/Level 1.unity
     guid: 6cb3df6e0a2139f4688755780e6fa4dc
   - enabled: 1
@@ -36,8 +33,17 @@ EditorBuildSettings:
     path: Assets/1.Scene/Level/Level 9.unity
     guid: 2ddeed6151e03d54591c25a9696f956d
   - enabled: 1
-    path: Assets/1.Scene/Level/Level 10_Boss.unity
-    guid: 4ccc133ace5ae344cadaf1273fb8c4e1
+    path: Assets/1.Scene/Boss/BossPhase 1.unity
+    guid: 7a4cff87faa4075488172636fe761d73
+  - enabled: 1
+    path: Assets/1.Scene/Boss/BossPhase 2.unity
+    guid: 6900a955918502e4880f7fb35885ec66
+  - enabled: 1
+    path: Assets/1.Scene/Boss/BossPhase 3.unity
+    guid: 1587c75733ef52b4abf7840757d9815b
+  - enabled: 1
+    path: Assets/1.Scene/Boss/BossPhase 4.unity
+    guid: 305c3512929435f4ea3f6942789aa94b
   - enabled: 1
     path: Assets/1.Scene/Level/Level 11_Home.unity
     guid: df436aa8535e15640bcfbf1cb3510a51

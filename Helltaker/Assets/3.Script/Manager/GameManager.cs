@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int remainTurn;
     public bool usingTurn = true;
-    
+
 
     public int RemainTurn
     {
@@ -65,12 +65,18 @@ public class GameManager : MonoBehaviour
 
     private void UpdateTurnText()
     {
-        turnText.text = remainTurn.ToString();
-        if (remainTurn == 0) turnText.text = "X";
+        try
+        {
+            turnText.text = remainTurn.ToString();
+            if (remainTurn == 0) turnText.text = "X";
+        }
+        catch
+        { }
     }
 
-    private void OnDie()
+    public void OnDie()
     {
+        Debug.Log("Die");
         deathAnim.transform.position = playerObj.transform.position;
         deathAnim.SetActive(true);
     }

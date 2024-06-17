@@ -26,6 +26,8 @@ public class Dialogue
     [Tooltip("초상화")]
     public string[] portrait;
 
+    [Tooltip("애니메이션")]
+    public string[] animation;
 }
 
 [System.Serializable]
