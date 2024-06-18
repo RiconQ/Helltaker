@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Image upImage;
 
     [SerializeField] private string levelName = "";
-    //°ÔÀÓ ½ÃÀÛ½Ã ¸Ş½ÃÁö
+    //ê²Œì„ ì‹œì‘ì‹œ ë©”ì‹œì§€
     private void Start()
     {
         DialogueManager.instance.GetInteractionEvent(GetComponent<InteractionEvent>());
@@ -29,30 +29,33 @@ public class MainMenu : MonoBehaviour
             item.gameObject.SetActive(value);
         EventSystem.current.SetSelectedGameObject(menuButtons[0].gameObject);
     }
-    
+
 
     public void ChoiceMenu(int index)
     {
-        //»õ °ÔÀÓ
+        //ìƒˆ ê²Œì„
         if (index == 0)
         {
             ToggleMenu(false);
             middleImage.texture = null;
             middleImage.color = upImage.color;
-            DialogueManager.instance.GetInteractionEvent(newGame);
             DialogueManager.instance.startNewGame = true;
+            DialogueManager.instance.GetInteractionEvent(newGame, 0);
             levelName = newGame.dialogue.name;
             DialogueManager.instance.nextLevelName = levelName;
         }
-        //Ã©ÅÍ ¼±ÅÃ
-        else if(index == 1)
+        //ì±•í„° ì„ íƒ
+        else if (index == 1)
         {
 
         }
-        //°ÔÀÓ Á¾·á
+        //ê²Œì„ ì¢…ë£Œ
         else
         {
-            DialogueManager.instance.GetInteractionEvent(exitGame);
+            Debug.Log("exit");
+            ToggleMenu(false);
+            DialogueManager.instance.exitGame = true;
+            DialogueManager.instance.GetInteractionEvent(exitGame, 0);
         }
 
     }

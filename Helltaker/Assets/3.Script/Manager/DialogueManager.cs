@@ -68,11 +68,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private bool isBoss = false; // �������� ��� ��ȭ ������ ���� ������\
     [SerializeField] private bool isLucy = false;
     [SerializeField] private GameObject lucyObj;
+    [Header("Level Exception")]
     [SerializeField] private bool isLevel10 = false;
     [SerializeField] private bool isCutScene = false;
+
+    [Header("MainMenu")]
     [SerializeField] private bool isMainMenu = false;
     [SerializeField] private MainMenu mainMenu;
     public bool startNewGame = false;
+    public bool exitGame;
 
     private void Start()
     {
@@ -205,6 +209,9 @@ public class DialogueManager : MonoBehaviour
                         //line 그대로 -> 더 이어지는 context 존재
                         if (contextCount + 1 < dialogues[lineCount].contexts.Length)
                         {
+                            if (startNewGame || exitGame)
+                                contextCount -= 1;
+
                             contextCount += 1;
                             if (deathUI.activeSelf)
                                 SetDialogue(Color.red, false);
@@ -247,10 +254,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     //InteractionEvent�� Dialogue �Ҵ�
-    public void GetInteractionEvent(InteractionEvent interactionEvent)
+    public void GetInteractionEvent(InteractionEvent interactionEvent, int line = 0, int context = 0)
     {
-        lineCount = 0;
-        contextCount = 0;
+        lineCount = line;
+        contextCount = context;
         portraitArray = interactionEvent.GetPortrait();
         ShowDialogue(interactionEvent.GetDialogue());
         selects = interactionEvent.GetEventSelects();
@@ -330,6 +337,8 @@ public class DialogueManager : MonoBehaviour
 
     private void SetDialogue(Color color = new Color(), bool showName = true)
     {
+        Debug.Log($"Line : {lineCount}  Context : {contextCount}");
+        //Debug.Log($"prev name {tmpName}, curr name {dialogues[lineCount].name}");
         if (color == new Color()) color = Color.white;
         ToggleUI(true);
         string currDialogue = dialogues[lineCount].contexts[contextCount];
@@ -411,7 +420,6 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        // ������ �߸� �����Ͽ� ���� ������ �Ŷ�� 
         if (deathUI.activeSelf)
         {
             if (isLevel10)
@@ -425,7 +433,6 @@ public class DialogueManager : MonoBehaviour
             GameManager.instance.RestartLevel();
         }
 
-        // �������� Ŭ�����
         if (isClear)
         {
             if (isLucy) lucyObj.SetActive(false);
@@ -444,11 +451,14 @@ public class DialogueManager : MonoBehaviour
 
         if (isMainMenu)
         {
-            Debug.Log(startNewGame);
             if (startNewGame)
             {
                 GameManager.instance.NextLevel(nextLevelName);
                 return;
+            }
+            if(exitGame)
+            {
+                Application.Quit();
             }
             //메뉴 선택
             mainMenu.ToggleMenu(true);
