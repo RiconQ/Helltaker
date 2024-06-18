@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractionEvent : MonoBehaviour
 {
-    [SerializeField] private DialogueEvent dialogue;
+    public DialogueEvent dialogue;
     [SerializeField] private SelectClass selectClass;
     [SerializeField] private Sprite[] portraits;
     //[SerializeField] private string levelName;
@@ -30,7 +30,7 @@ public class InteractionEvent : MonoBehaviour
 
     public Sprite[] GetPortrait()
     {
-        Debug.Log("Get portrait length: " + portraits.Length);
+        //Debug.Log("Get portrait length: " + portraits.Length);
         return portraits;
     }
 }

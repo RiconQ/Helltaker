@@ -18,28 +18,33 @@ public class DialogueManager : MonoBehaviour
 
         else
         {
-            Debug.Log("�̹� �� ���ӿ��� DialogueManager �����մϴ�.");
+            //Debug.Log("�̹� �� ���ӿ��� DialogueManager �����մϴ�.");
             Destroy(gameObject);
         }
     }
 
+    [Header("Text")]
     [SerializeField] private Text txtDialogue;
     [SerializeField] private Text txtName;
 
+    [Header("UI")]
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private GameObject deathUI;
     [SerializeField] private GameObject clearUI;
     [SerializeField] private GameObject dialogueBG;
     [SerializeField] private Image portrait;
 
+    [Header("Animator")]
     [SerializeField] private Animator fadeOutAnimator;
 
+
+    [Header("Portrait")]
     [SerializeField] private Sprite[] portraitArray;
     [SerializeField] private Animator portraitAnimator;
     //[SerializeField] private Animator portraitAnimator;
     //[SerializeField] private AnimationClip[] portraitAnimations;
     //[SerializeField] private Sprite[] animThumnail;
-    private string tmpName ="";
+    private string tmpName = "";
 
     private int lineX;
     private Dialogue[] dialogues;
@@ -57,14 +62,24 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private int eventID = -1;
 
     public string nextLevelName;
+    private bool isClear = false;
 
+    [Header("Exception")]
     [SerializeField] private bool isBoss = false; // �������� ��� ��ȭ ������ ���� ������\
     [SerializeField] private bool isLucy = false;
     [SerializeField] private GameObject lucyObj;
+    [SerializeField] private bool isLevel10 = false;
+    [SerializeField] private bool isCutScene = false;
+    [SerializeField] private bool isMainMenu = false;
+    [SerializeField] private MainMenu mainMenu;
+    public bool startNewGame = false;
 
     private void Start()
     {
-        ToggleUI(false);
+        if (isCutScene || isMainMenu)
+            ToggleUI(true);
+        else
+            ToggleUI(false);
     }
 
     private void Update()
@@ -72,149 +87,151 @@ public class DialogueManager : MonoBehaviour
 
         if (isDialogue)
         {
-            //Debug.Log("isDialogue True");
             if (isNext)
             {
-                //Debug.Log("isNext True");
-                //if (isSelect)
-                //{
-                //    //Debug.Log("isSelect True");
-                //    //if(Input.GetKeyDown(KeyCode.UpArrow))
-                //    //{
-                //    //
-                //    //}
-                //    //else if(Input.GetKeyDown(K))
-                //}
                 if (!isSelect)
                 {
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
                     {
                         isNext = false;
-                        txtDialogue.text = "";
-                        txtName.text = "";
+                        //txtDialogue.text = "";
+                        //txtName.text = "";
 
-                        Debug.Log($"line {lineCount}, context {contextCount}");
+                        //Debug.Log($"prev line {lineCount}, context {contextCount}");
+                        if (clearUI.activeSelf)
+                        {
+                            clearUI.SetActive(false);
+                        }
 
-                        // ���� ���� �������� ������ ���
+                        // 사망씬 활성화되어 있다면 클릭시 재시작
                         if (deathUI.activeSelf)
                         {
                             EndDialogue();
                             return;
                         }
-                        if (clearUI.activeSelf)
+
+                        //isClear가 true이고 마지막대사면 대화 종료, 클리어 애니메이션 재생
+                        if (isClear && contextCount == dialogues[lineCount].contexts.Length - 1)
                         {
-                            Debug.Log("Clear");
+                            //Debug.Log("Clear");
                             EndDialogue();
                             return;
                         }
 
-                        // ���� ���� �������� ������ ���
-                        if (dialogues[lineCount].showDeath[0] != ("")
-                            && contextCount == dialogues[lineCount].contexts.Length - 2)
+                        if (contextCount != -1)
                         {
-                            if (!deathUI.activeSelf)
+                            //사망 트리거 존재하고, 현재 장면에서 사망 트리거 발동시 사망 애니메이션 재생
+                            if (dialogues[lineCount].showDeath[contextCount] != (""))
                             {
-                                Debug.Log("ShowDeath");
-                                ShowDeath();
+                                if (!deathUI.activeSelf)
+                                {
+                                    //Debug.Log("ShowDeath");
+                                    ShowDeath();
+                                    //return;
+                                }
+                            }
+                            if (dialogues[lineCount].clearStage[contextCount] != "")
+                            {
+                                // Debug.Log($"if prev line {lineCount}, context {contextCount}");
+                                SetDialogue();
+                                if (!clearUI.activeSelf && !isClear)
+                                {
+                                    //Debug.Log("ShowClear 135");
+                                    ShowClear();
+                                    isClear = true;
+                                }
                             }
                         }
+                        // 클리어 트리고 존재, 클리어 화면 비활성화시 애니메이션 재생
+                        //Debug.Log($"prev line {lineCount}, context {contextCount}");
+                        if (contextCount == -1)
+                        {
+                            //contextCount += 1;
+                            //if (dialogues[lineCount].showDeath[contextCount] != (""))
+                            //{
+                            //    if (!deathUI.activeSelf)
+                            //    {
+                            //        Debug.Log("ShowDeath");
+                            //        ShowDeath();
+                            //        return;
+                            //    }
+                            //}
+                            //else
+                            //    contextCount -= 1;
 
-                        // ������ ����.
-                        Debug.Log($"������ ���� {lineCount}, {contextCount}");
-                        //Debug.Log(dialogues[lineCount].eventNum.Length);
+                            contextCount += 1;
+                            if (dialogues[lineCount].clearStage[contextCount] != "")
+                            {
+                                SetDialogue();
+                                if (!clearUI.activeSelf && !isClear)
+                                {
+
+                                    //Debug.Log("ShowClear 164");
+                                    ShowClear();
+                                    isClear = true;
+                                    return;
+                                }
+                            }
+                            else
+                                contextCount -= 1;
+                        }
+                        #region
+                        //if (dialogues[lineCount].clearStage[contextCount == -1 ? 0 : contextCount] != ""
+                        //            && contextCount == dialogues[lineCount].contexts.Length - 2)
+                        //{
+                        //    contextCount = 0;
+                        //    SetDialogue();
+                        //    if (!clearUI.activeSelf || !isClear)
+                        //    {
+                        //        ShowClear();
+                        //        isClear = true;
+                        //        return;
+                        //    }
+                        //    else
+                        //        isNext = true;
+                        //}
+                        #endregion
+
+                        //이벤트 발동 트리거
                         int tmpEvent = dialogues[lineCount].eventNum.Length - 1;
                         if (!dialogues[lineCount].eventNum[tmpEvent].Equals("") && contextCount == tmpEvent)
                         {
-                            Debug.Log($"������ ���� {lineCount}, {contextCount}");
-                            //Debug.Log(dialogues[lineCount].eventNum[0]);
                             ShowSelect(dialogues[lineCount].eventNum[tmpEvent]);
                             isSelect = true;
-                            //contextCount -= 1;
                             isNext = true;
-                            //selectIndex = 0;
                             SetDialogue();
                             return;
                         }
+                        //line 그대로 -> 더 이어지는 context 존재
                         if (contextCount + 1 < dialogues[lineCount].contexts.Length)
                         {
                             contextCount += 1;
-                            Debug.Log("��ŵ ����, ���� Context");
                             if (deathUI.activeSelf)
                                 SetDialogue(Color.red, false);
                             else
                                 SetDialogue();
                         }
+                        // 더 이어지는 context 없음
                         else
                         {
+                            // skipLine 존재
                             if (!dialogues[lineCount].skipLine[0].Equals(""))
                             {
-                                Debug.Log($"��ŵ ���� ���� {int.Parse(dialogues[lineCount].skipLine[0]) - lineX}");
-                                if (dialogues[lineCount].clearStage[0] != ""
-                                    && contextCount == dialogues[lineCount].contexts.Length - 1)
-                                {
-                                    contextCount = 0;
-                                    //contextCount -= 1;
-                                    SetDialogue();
-                                    if (!clearUI.activeSelf)
-                                        ShowClear();
-                                    isNext = true;
-                                    return;
-                                }
                                 lineCount = int.Parse(dialogues[lineCount].skipLine[0]) - lineX;
-                                //Debug.Log(lineCount);
-                                //if (lineCount + 1 < dialogues.Length)
-                                //{
-                                //    lineCount += 1;
-                                //    SetDialogue();
-                                //}
                             }
+                            // line 변경 후, 대화가 끝났는지 확인
                             if (lineCount + 1 < dialogues.Length)
                             {
                                 lineCount += 1;
                                 contextCount = 0;
-                                Debug.Log($"��ŵ ����, ���� Line : Line : {lineCount}  Context : {contextCount}");
-                                if (dialogues[lineCount].clearStage[0] != ""
-                                    && contextCount == dialogues[lineCount].contexts.Length - 1)
-                                {
-                                    //contextCount -= 1;
-                                    SetDialogue();
-                                    if (!clearUI.activeSelf)
-                                        ShowClear();
-                                    isNext = true;
-                                    return;
-                                }
                                 if (deathUI.activeSelf)
                                     SetDialogue(Color.red);
                                 else
                                     SetDialogue();
                             }
+                            //대화 종료
                             else
                             {
-
-                                //��ȭ ����
-                                // ��ȭ ����� ��Ȳ
-
-                                // 2. �������� Ŭ���� -> ���� ������
-                                Debug.Log($"��ȭ �� line : {lineCount}, context : {contextCount}");
-                                //Debug.Log($"��ȭ �� {dialogues[lineCount].contexts.Length - 1}");
-                                //Debug.Log($"��ȭ �� {(dialogues[lineCount].clearStage[0]!="")}");
-
-                                //int tmpClear = dialogues[lineCount].contexts.Length - 1;
-                                if (dialogues[lineCount].clearStage[0] != ""
-                                    && contextCount == dialogues[lineCount].contexts.Length - 1)
-                                {
-                                    //contextCount -= 1;
-                                    SetDialogue();
-                                    if (!clearUI.activeSelf)
-                                        ShowClear();
-                                    isNext = true;
-                                    return;
-                                }
-
-                                // 3. �������� ���� -> ��� �ƽ� �� ���� �����
-                                //ShowDeath();
-
-                                // 1. ���� ���� -> ���� �ٽ� ����
                                 if (isBoss)
                                 {
                                     GameManager.instance.NextLevel(nextLevelName);
@@ -232,6 +249,8 @@ public class DialogueManager : MonoBehaviour
     //InteractionEvent�� Dialogue �Ҵ�
     public void GetInteractionEvent(InteractionEvent interactionEvent)
     {
+        lineCount = 0;
+        contextCount = 0;
         portraitArray = interactionEvent.GetPortrait();
         ShowDialogue(interactionEvent.GetDialogue());
         selects = interactionEvent.GetEventSelects();
@@ -253,15 +272,15 @@ public class DialogueManager : MonoBehaviour
         //{
         //    Debug.Log($"i : {i}, {dialogues[i].skipLine[i]}");
         //}
-        Debug.Log($"Start : Line : {lineCount}  Context : {contextCount}");
+        //Debug.Log($"Start : Line : {lineCount}  Context : {contextCount}");
     }
 
     public void ShowSelect(string eventID)
     {
-        Debug.Log($"eventID : {eventID}");
+        //Debug.Log($"eventID : {eventID}");
         this.eventID = FindSelectID(eventID);
-        Debug.Log($"eventID : {this.eventID}");
-        Debug.Log($"select Length : {selects[this.eventID].select.Length}");
+        // Debug.Log($"eventID : {this.eventID}");
+        //Debug.Log($"select Length : {selects[this.eventID].select.Length}");
 
         ShowSelectUI(selects[this.eventID].select.Length, true);
         //for (int i = 0; i < selects[this.eventID].select.Length; i++)
@@ -292,8 +311,9 @@ public class DialogueManager : MonoBehaviour
             int tmpIndex = dialogues[lineCount].eventNum.Length - 1;
             string tmp =
                 selects[FindSelectID(dialogues[lineCount].eventNum[tmpIndex])].select[i];
-            tmp.Replace('`', ',');
-            tmp.Replace('|', '\n');
+            tmp.Replace('^', ',');
+            //tmp.Replace('|', '\n');
+            //Debug.Log(tmp);
             selectBox[i].gameObject.GetComponentInChildren<Text>().text = tmp;
             //Debug.Log(i);
         }
@@ -313,31 +333,32 @@ public class DialogueManager : MonoBehaviour
         if (color == new Color()) color = Color.white;
         ToggleUI(true);
         string currDialogue = dialogues[lineCount].contexts[contextCount];
-        currDialogue = currDialogue.Replace('`', ',');
+        currDialogue = currDialogue.Replace('^', ',');
         currDialogue = currDialogue.Replace('|', '\n');
+        portrait.gameObject.SetActive(false);
+
+        portrait.color = new Color(1, 1, 1, 1);
 
         //Debug.Log("Sprite : " + int.Parse(dialogues[lineCount].portrait[contextCount]));
         if (int.Parse(dialogues[lineCount].portrait[contextCount]) != -1)
         {
             if (dialogues[lineCount].name != tmpName)
             {
-                Debug.Log($"prev name {tmpName}, curr name {dialogues[lineCount].name}");
+                //Debug.Log($"prev name {tmpName}, curr name {dialogues[lineCount].name}");
                 tmpName = dialogues[lineCount].name;
-                portrait.gameObject.SetActive(false);
                 portrait.gameObject.SetActive(true);
             }
             portrait.gameObject.SetActive(true);
-            Debug.Log($"image num : {int.Parse(dialogues[lineCount].portrait[contextCount])}");
-            try
-            {
-                //Destroy(portrait.gameObject.GetComponent<Animator>());
-            }
-            catch { }
+
             portrait.sprite = portraitArray[int.Parse(dialogues[lineCount].portrait[contextCount])];
             portrait.SetNativeSize();
         }
         else
-            portrait.gameObject.SetActive(false);
+        {
+            //Debug.Log("portrait false");
+            //portrait.sprite = null;
+            portrait.color = new Color(0, 0, 0, 0);
+        }
         #region
         //if (dialogues[lineCount].animation[contextCount] != "")
         //{
@@ -357,27 +378,33 @@ public class DialogueManager : MonoBehaviour
         //}
         //portraitAnimator.gameObject.SetActive(false);
 
-
-        //if(showName == true)
-        //{
-        //    if(!txtName.text.Equals(dialogues[lineCount].name))
-        //    {
-        //        //이름 다름. 애니메이션 출력
-        //        Debug.Log($"prev name {txtName.text}, curr name {dialogues[lineCount].name}");
-        //        portraitAnimator.Play("PortraitFadeIn");
-        //    }
-        //    txtName.text = dialogues[lineCount].name;
-        //}
-        //else
-        //{
-        //    txtName.text = "";
-        //}
         #endregion
+
+        if (showName == true)
+        {
+            if (!txtName.text.Equals(dialogues[lineCount].name))
+            {
+                //이름 다름. 애니메이션 출력
+                //Debug.Log($"prev name {txtName.text}, curr name {dialogues[lineCount].name}");
+                portraitAnimator.Play("PortraitFadeIn");
+            }
+            txtName.text = dialogues[lineCount].name;
+        }
+        else
+        {
+            txtName.text = "";
+        }
         //portraitAnimator.Play("PortraitFadeIn");
         //Debug.Log($"prev name {txtName.text}, curr name {dialogues[lineCount].name}");
         txtName.text = (showName == true) ? dialogues[lineCount].name : "";
         txtName.color = Color.red;
-        txtDialogue.text = currDialogue;
+        if (txtDialogue.text != currDialogue)
+        {
+            txtDialogue.text = currDialogue;
+            txtDialogue.GetComponent<Animator>().Play("PopUp");
+        }
+        else
+            txtDialogue.text = currDialogue;
         txtDialogue.color = color;
         isNext = true;
     }
@@ -387,6 +414,11 @@ public class DialogueManager : MonoBehaviour
         // ������ �߸� �����Ͽ� ���� ������ �Ŷ�� 
         if (deathUI.activeSelf)
         {
+            if (isLevel10)
+            {
+                GameManager.instance.NextLevel(nextLevelName);
+                return;
+            }
             if (isLucy) lucyObj.SetActive(false);
             //fadeOutAnimator.gameObject.SetActive(true);
             //LevelManager.instance.SetNextLevelName();
@@ -394,26 +426,50 @@ public class DialogueManager : MonoBehaviour
         }
 
         // �������� Ŭ�����
-        if (clearUI.activeSelf)
+        if (isClear)
         {
             if (isLucy) lucyObj.SetActive(false);
             clearUI.SetActive(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().SetIsMoving(true);
             GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().Play("Victory");
             //GameManager.instance.NextLevel(nextLevelName);
         }
+        if (isCutScene)
+        {
+            GameManager.instance.NextLevel(nextLevelName);
+            return;
+        }
+
+        txtDialogue.text = "";
+
+        if (isMainMenu)
+        {
+            Debug.Log(startNewGame);
+            if (startNewGame)
+            {
+                GameManager.instance.NextLevel(nextLevelName);
+                return;
+            }
+            //메뉴 선택
+            mainMenu.ToggleMenu(true);
+            return;
+        }
+        txtName.text = "";
 
         isDialogue = false;
         contextCount = 0;
         lineCount = 0;
         dialogues = null;
         isNext = false;
+
         ToggleUI(false);
 
     }
 
     public void ToggleUI(bool value)
     {
-        dialogueUI.SetActive(value);
+        if (!value) dialogueUI.GetComponent<Animator>().Play("DialogueUIFadeOut");
+        else dialogueUI.SetActive(value);
     }
 
     private void ShowDeath()
@@ -426,13 +482,12 @@ public class DialogueManager : MonoBehaviour
 
     private void ShowClear()
     {
-        Debug.Log("ShowClear");
         clearUI.SetActive(true);
     }
     public void ChoiceSelects(int index)
     {
         lineCount = int.Parse(selects[eventID].lineToMove[index]) - lineX;
-        Debug.Log($"lineX : {lineX}, line to move : " + (int.Parse(selects[eventID].lineToMove[index]) - lineX));
+        //Debug.Log($"lineX : {lineX}, line to move : " + (int.Parse(selects[eventID].lineToMove[index]) - lineX));
         contextCount = -1;
         ShowSelectUI(0);
         isSelect = false;

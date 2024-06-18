@@ -36,7 +36,7 @@ public class CameraShakeManager : MonoBehaviour
         {
             Camera.main.transform.position = 
                 new Vector3(Random.RandomRange(-1f, 1f) * shakeAmount, Random.RandomRange(-1f, 1f) * shakeAmount, -10) ;
-            Debug.Log(Camera.main.transform.position);
+           // Debug.Log(Camera.main.transform.position);
             timer += 0.01f;
             yield return new WaitForSeconds(0.01f);
         }

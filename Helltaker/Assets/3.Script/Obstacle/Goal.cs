@@ -22,7 +22,7 @@ public class Goal : MonoBehaviour
             DialogueManager.instance.ToggleUI(true);
             lucyObject.SetActive(true);
         }
-        else if(isHome)
+        else if (isHome)
         {
             StartDialogue();
             transform.parent.gameObject.SetActive(false);
@@ -37,7 +37,7 @@ public class Goal : MonoBehaviour
         //animator.gameObject.SetActive(true);
         //LevelManager.instance.SetNextLevelName(levelName);
     }
-    
+
     public void StartDialogue()
     {
         DialogueManager.instance.GetInteractionEvent(GetComponent<InteractionEvent>());

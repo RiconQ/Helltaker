@@ -1025,6 +1025,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &709337540 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8872360961536016141, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
+  m_PrefabInstance: {fileID: 709337527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &714807177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1329,6 +1334,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e9c780c769ea64d998c6dfce724da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &911074858
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 282955171072433739, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: npcs.Array.data[0]
+      value: 
+      objectReference: {fileID: 947369038}
+    - target: {fileID: 282955172272189696, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_Name
+      value: Particle
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 282955172272189697, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 954e5e6e031d247408b6582cc95418db, type: 3}
 --- !u!1 &947369038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,6 +1407,7 @@ GameObject:
   - component: {fileID: 947369039}
   - component: {fileID: 947369041}
   - component: {fileID: 947369042}
+  - component: {fileID: 947369043}
   m_Layer: 3
   m_Name: Zdrada
   m_TagString: Wall
@@ -1458,6 +1525,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &947369043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947369038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae70c3e61c1a7e143adc100fb7f73abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lucyFace: {fileID: 0}
+  Skel: []
+  LucyGoal: {fileID: 0}
 --- !u!1 &1018656491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,6 +2787,10 @@ PrefabInstance:
       propertyPath: fadeOutAnimator
       value: 
       objectReference: {fileID: 864554047}
+    - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
+      propertyPath: portraitAnimator
+      value: 
+      objectReference: {fileID: 709337540}
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: selectBox.Array.data[0]
       value: 

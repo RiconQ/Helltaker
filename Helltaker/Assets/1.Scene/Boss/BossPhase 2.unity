@@ -4526,6 +4526,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 328242}
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
+      propertyPath: portraitAnimator
+      value: 
+      objectReference: {fileID: 3585959637640466213}
+    - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: selectBox.Array.data[0]
       value: 
       objectReference: {fileID: 7725283185469931401}
@@ -15461,6 +15465,7 @@ MonoBehaviour:
   hasKey: 0
   hasAdvice: 0
   isBoss: 1
+  playerAnimator: {fileID: 0}
 --- !u!114 &3252055926492563592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15555,6 +15560,7 @@ GameObject:
   - component: {fileID: 8214275359647203770}
   - component: {fileID: 8591359591140538096}
   - component: {fileID: 836998152445734049}
+  - component: {fileID: 3585959637640466213}
   m_Layer: 5
   m_Name: Portrait
   m_TagString: Untagged
@@ -15562,6 +15568,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &3585959637640466213
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3585959637640466212}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f599fa57b52db9419a1077ab6aa82d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!224 &3611454473447247002
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16395,7 +16420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5371ebb1fb61a714ca9cb6a6f75636c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cfa8e805a2210ca4fa2bfff788ebda29, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16451,6 +16476,7 @@ GameObject:
   - component: {fileID: 7725283185024724999}
   - component: {fileID: 7725283185024724993}
   - component: {fileID: 7725283185024724998}
+  - component: {fileID: 7725283185024724997}
   m_Layer: 5
   m_Name: DialogueText
   m_TagString: Untagged
@@ -16458,6 +16484,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &7725283185024724997
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725283185024724996}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 58269b19be527a641a3c0e8a47eb2f9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7725283185024724998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16714,13 +16759,33 @@ GameObject:
   m_Component:
   - component: {fileID: 7725283185333423234}
   - component: {fileID: 7725283185333423244}
+  - component: {fileID: 7725283185333423236}
   m_Layer: 5
   m_Name: DialogueUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
+--- !u!95 &7725283185333423236
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725283185333423235}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: acf86cf61987afe45ae646b88e0e8697, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!222 &7725283185333423244
 CanvasRenderer:
   m_ObjectHideFlags: 0

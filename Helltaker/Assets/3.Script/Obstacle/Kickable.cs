@@ -35,6 +35,7 @@ public class Kickable : MonoBehaviour
             // breakable이 true라면 해당 오브젝트 부서짐(Destroy)
             if (breakable)
             {
+                BoneParticleManager.instance.PlayBoneParticle(this.transform.position);
                 Destroy(gameObject);
                 return;
             }
@@ -108,6 +109,7 @@ public class Kickable : MonoBehaviour
         {
             if (collider.CompareTag("Spike") && collider.gameObject.GetComponent<Spike>().GetIsSpike())
             {
+                BoneParticleManager.instance.PlayBoneParticle(this.transform.position);
                 Destroy(gameObject);
                 //Debug.Log("Spike.");
             }

@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private bool hasAdvice = true;
     [SerializeField] private bool isBoss = false;
 
-    private AnimController playerAnimator;
+    public AnimController playerAnimator;
     //private SpriteRenderer renderer;
 
     //[SerializeField] private Animator runAnimator;

@@ -7,7 +7,18 @@ public class AnimationHandler : MonoBehaviour
     //����
 
     public void OnEndFadeIn()
-        => gameObject.SetActive(false);
+    {
+        TryStartCutScene();
+        gameObject.SetActive(false);
+    }
+    private void TryStartCutScene()
+    {
+        try
+        {
+            GameObject.FindGameObjectWithTag("CutScene").GetComponent<CutScene>().StartCutScene();
+        }
+        catch { }
+    }
 
     public void LoadNextLevel()
         => LevelManager.instance.LoadNextLevel();
@@ -17,7 +28,7 @@ public class AnimationHandler : MonoBehaviour
 
     public void OnGetKey()
         => Destroy(gameObject);
-    
+
 
     // �����
     [SerializeField] private GameObject lucyFace;
@@ -45,4 +56,19 @@ public class AnimationHandler : MonoBehaviour
 
     public void Victory()
         => GameManager.instance.NextLevel(DialogueManager.instance.nextLevelName);
+
+    public void PlayVictoryAnim()
+    {
+        HeartParticleManager.instance.PlayVictoryAnim();
+    }
+
+    public void PlayHeartAnim()
+    {
+        HeartParticleManager.instance.PlayHeart();
+    }
+
+    public void PlayCerberus()
+    {
+        this.GetComponent<ParticleSystem>().Play();
+    }
 }

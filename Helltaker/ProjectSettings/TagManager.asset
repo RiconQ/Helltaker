@@ -12,6 +12,7 @@ TagManager:
   - Goal
   - FX
   - BossChain
+  - CutScene
   layers:
   - Default
   - TransparentFX

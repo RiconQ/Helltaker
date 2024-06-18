@@ -1038,6 +1038,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6425456436957373953, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
+      propertyPath: m_Text
+      value: IX
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
 --- !u!114 &681023717 stripped
@@ -1131,6 +1135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &681023728 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8872360961536016141, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
+  m_PrefabInstance: {fileID: 681023716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &693560585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1140,15 +1149,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.x
-      value: 0
+      value: 131
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.line.y
-      value: 0
+      value: 132
       objectReference: {fileID: 0}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: dialogue.dialogues.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643690, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_Name
@@ -1156,7 +1165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643693, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: levelName
-      value: Level 10
+      value: BossStart
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643695, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_RootOrder
@@ -2597,6 +2606,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 681023721}
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
+      propertyPath: isLevel10
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: dialogueBG
       value: 
       objectReference: {fileID: 681023722}
@@ -2612,6 +2625,10 @@ PrefabInstance:
       propertyPath: fadeOutAnimator
       value: 
       objectReference: {fileID: 106262162}
+    - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
+      propertyPath: portraitAnimator
+      value: 
+      objectReference: {fileID: 681023728}
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: selectBox.Array.data[0]
       value: 

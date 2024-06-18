@@ -14,9 +14,15 @@ public class BossPlayer : MonoBehaviour
         {
             if (index == 3)
                 GameManager.instance.OnDie();
-            sinPyre[index].GetComponent<SpriteRenderer>().sprite = fireOff;
-            sinPyre[index].GetComponentInChildren<Animator>().gameObject.SetActive(false);
-            index += 1;
+
+            else
+            {
+                CameraShakeManager.instance.Shake();
+                this.GetComponent<PlayerControl>().playerAnimator.ShowBloodFX(transform.position);
+                sinPyre[index].GetComponent<SpriteRenderer>().sprite = fireOff;
+                sinPyre[index].GetComponentInChildren<Animator>().gameObject.SetActive(false);
+                index += 1;
+            }
         }
     }
 }
