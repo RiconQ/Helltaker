@@ -8,6 +8,7 @@ public class Goal : MonoBehaviour
     [SerializeField] private string levelName;
     [SerializeField] private bool isLucy;
     [SerializeField] private bool isHome;
+    [SerializeField] private bool isEnd = false;
     [SerializeField] private GameObject lucyObject;
 
 
@@ -25,6 +26,7 @@ public class Goal : MonoBehaviour
         else if (isHome)
         {
             StartDialogue();
+            if (isEnd) return;
             transform.parent.gameObject.SetActive(false);
         }
 

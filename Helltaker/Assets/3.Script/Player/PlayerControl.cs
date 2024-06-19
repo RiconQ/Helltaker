@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 20f;
     [SerializeField] private bool hasKey = false;
     private bool isMoving = false;
     [SerializeField] private bool hasAdvice = true;
     [SerializeField] private bool isBoss = false;
+    [SerializeField] private PauseMenu pauseMenu;
 
     public AnimController playerAnimator;
     //private SpriteRenderer renderer;
@@ -21,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         playerAnimator = GetComponent<AnimController>();
+        TryGetComponent(out pauseMenu);
         //renderer = transform.GetComponent<SpriteRenderer>();
         //animator = transform.GetComponent<Animator>();
     }
@@ -29,11 +31,31 @@ public class PlayerControl : MonoBehaviour
     {
         if (!DialogueManager.instance.isDialogue)
         {
-            if (!isMoving)
+            if (!DialogueManager.instance.isMainMenu)
+            {
+
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    //게임이 멈춰있다면
+                    if (pauseMenu.gamePause)
+                    {
+                        pauseMenu.TogglePause(false);
+                        pauseMenu.gamePause = false;
+                    }
+                    //게임이 진행중이라면
+                    else
+                    {
+                        pauseMenu.TogglePause(true);
+                        pauseMenu.gamePause = true;
+                    }
+                }
+            }
+            if (!isMoving && !pauseMenu.gamePause)
             {
                 //Debug.Log(isMoving);
                 InputMove();
             }
+
         }
         //Debug.Log(isMoving);
     }
@@ -82,7 +104,7 @@ public class PlayerControl : MonoBehaviour
         if (collider != null)
             if (CheckObstacle(collider, x, y))
             {
-                if(collider.gameObject.CompareTag("BossChain"))
+                if (collider.gameObject.CompareTag("BossChain"))
                 {
                     collider.gameObject.GetComponent<BossChain>().KickChain();
                     Debug.Log("Boss Chain");
@@ -135,7 +157,7 @@ public class PlayerControl : MonoBehaviour
         //Debug.DrawRay(transform.position + new Vector3(x, y, 0), new Vector3(x, y, 0) * dist, Color.red, 3f);
         if (hit.collider != null)
         {
-           // Debug.Log(hit.collider.name);
+            // Debug.Log(hit.collider.name);
             return hit.collider;
         }
         return null;
@@ -250,5 +272,9 @@ public class PlayerControl : MonoBehaviour
         {
             //Debug.Log("Not Found Skeleton Manager");
         }
+    }
+    public void HomePlayerMove()
+    {
+        Move(0, 1);
     }
 }

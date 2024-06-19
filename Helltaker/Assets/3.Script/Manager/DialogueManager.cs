@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject clearUI;
     [SerializeField] private GameObject dialogueBG;
     [SerializeField] private Image portrait;
+    [SerializeField] private GameObject booper;
 
     [Header("Animator")]
     [SerializeField] private Animator fadeOutAnimator;
@@ -71,12 +72,16 @@ public class DialogueManager : MonoBehaviour
     [Header("Level Exception")]
     [SerializeField] private bool isLevel10 = false;
     [SerializeField] private bool isCutScene = false;
+    public bool isHome = false;
+    private bool isEnd = false;
 
     [Header("MainMenu")]
-    [SerializeField] private bool isMainMenu = false;
+    public bool isMainMenu = false;
     [SerializeField] private MainMenu mainMenu;
     public bool startNewGame = false;
     public bool exitGame;
+    [HideInInspector] public bool isSkip = false;
+
 
     private void Start()
     {
@@ -89,6 +94,11 @@ public class DialogueManager : MonoBehaviour
     private void Update()
     {
 
+        if (isSkip)
+        {
+            isSkip = false;
+            return;
+        }
         if (isDialogue)
         {
             if (isNext)
@@ -97,6 +107,9 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
                     {
+
+                        if (booper.activeSelf)
+                            booper.GetComponent<Animator>().Play("booperPop");
                         isNext = false;
                         //txtDialogue.text = "";
                         //txtName.text = "";
@@ -200,6 +213,7 @@ public class DialogueManager : MonoBehaviour
                         int tmpEvent = dialogues[lineCount].eventNum.Length - 1;
                         if (!dialogues[lineCount].eventNum[tmpEvent].Equals("") && contextCount == tmpEvent)
                         {
+                            booper.SetActive(false);
                             ShowSelect(dialogues[lineCount].eventNum[tmpEvent]);
                             isSelect = true;
                             isNext = true;
@@ -209,8 +223,8 @@ public class DialogueManager : MonoBehaviour
                         //line 그대로 -> 더 이어지는 context 존재
                         if (contextCount + 1 < dialogues[lineCount].contexts.Length)
                         {
-                            if (startNewGame || exitGame)
-                                contextCount -= 1;
+                            //if (startNewGame || exitGame)
+                            //    contextCount -= 1;
 
                             contextCount += 1;
                             if (deathUI.activeSelf)
@@ -246,7 +260,6 @@ public class DialogueManager : MonoBehaviour
                                 EndDialogue();
                             }
                         }
-
                     }
                 }
             }
@@ -268,13 +281,13 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowDialogue(Dialogue[] p_dialogues)
     {
-        isDialogue = true;
 
         txtDialogue.text = "";
         txtName.text = "";
         dialogues = p_dialogues;
 
         SetDialogue();
+        isDialogue = true;
         //for(int i = 0; i < dialogues.Length; i++)
         //{
         //    Debug.Log($"i : {i}, {dialogues[i].skipLine[i]}");
@@ -306,8 +319,9 @@ public class DialogueManager : MonoBehaviour
     }
 
     // �ƹ� �Ű� ���� �Ȱǳ��ָ� ���δ� SetActive false;
-    private void ShowSelectUI(int num = 3, bool value = false)
+    private void ShowSelectUI(int num = 2, bool value = false)
     {
+        booper.SetActive(false);
         selectUI.SetActive(value);
         selectUI.GetComponent<RectTransform>().sizeDelta = new Vector2(400, num * 100);
         for (int i = 0; i < num; i++)
@@ -318,25 +332,26 @@ public class DialogueManager : MonoBehaviour
             int tmpIndex = dialogues[lineCount].eventNum.Length - 1;
             string tmp =
                 selects[FindSelectID(dialogues[lineCount].eventNum[tmpIndex])].select[i];
-            tmp.Replace('^', ',');
+            tmp = tmp.Replace('^', ',');
+            Debug.Log(tmp);
             //tmp.Replace('|', '\n');
-            //Debug.Log(tmp);
             selectBox[i].gameObject.GetComponentInChildren<Text>().text = tmp;
             //Debug.Log(i);
         }
-        for (int i = num; i < selectBox.Length; i++)
-        {
-            if (selectBox[i].gameObject.activeSelf)
-                selectBox[i].gameObject.SetActive(false);
-        }
-        if (num != 3)
-        {
-            EventSystem.current.SetSelectedGameObject(selectBox[0].gameObject);
-        }
+        //for (int i = num; i < selectBox.Length; i++)
+        //{
+        //    if (selectBox[i].gameObject.activeSelf)
+        //        selectBox[i].gameObject.SetActive(false);
+        //}
+        //if (num != 3)
+        //{
+        EventSystem.current.SetSelectedGameObject(selectBox[0].gameObject);
+        //}
     }
 
     private void SetDialogue(Color color = new Color(), bool showName = true)
     {
+        //isDialogue = false;
         Debug.Log($"Line : {lineCount}  Context : {contextCount}");
         //Debug.Log($"prev name {tmpName}, curr name {dialogues[lineCount].name}");
         if (color == new Color()) color = Color.white;
@@ -416,10 +431,14 @@ public class DialogueManager : MonoBehaviour
             txtDialogue.text = currDialogue;
         txtDialogue.color = color;
         isNext = true;
+        if (!isSelect)
+            booper.SetActive(true);
+        isDialogue = true;
     }
 
     private void EndDialogue()
     {
+        booper.SetActive(false);
         if (deathUI.activeSelf)
         {
             if (isLevel10)
@@ -441,11 +460,17 @@ public class DialogueManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().Play("Victory");
             //GameManager.instance.NextLevel(nextLevelName);
         }
-        if (isCutScene)
+        if (isCutScene || isEnd)
         {
             GameManager.instance.NextLevel(nextLevelName);
             return;
         }
+        //if(isEnd)
+        //{
+        //    Debug.Log("isEnd");
+        //    GameManager.instance.NextLevel("MainMenu");
+        //    return;
+        //}
 
         txtDialogue.text = "";
 
@@ -454,11 +479,16 @@ public class DialogueManager : MonoBehaviour
             if (startNewGame)
             {
                 GameManager.instance.NextLevel(nextLevelName);
+
+                isDialogue = false;
+
+                ToggleUI(false);
                 return;
             }
-            if(exitGame)
+            if (exitGame)
             {
                 Application.Quit();
+                return;
             }
             //메뉴 선택
             mainMenu.ToggleMenu(true);
@@ -496,6 +526,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void ChoiceSelects(int index)
     {
+        if (isHome && index == 0) isEnd = true;
         lineCount = int.Parse(selects[eventID].lineToMove[index]) - lineX;
         //Debug.Log($"lineX : {lineX}, line to move : " + (int.Parse(selects[eventID].lineToMove[index]) - lineX));
         contextCount = -1;

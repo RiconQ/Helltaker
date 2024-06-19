@@ -54,6 +54,6 @@ EditorBuildSettings:
     path: Assets/1.Scene/CutScene/BossEnd.unity
     guid: 44be6e0787945654581f16e7f4705cae
   - enabled: 1
-    path: Assets/1.Scene/Level/Level 11_Home.unity
+    path: Assets/1.Scene/Level/Level 10.unity
     guid: df436aa8535e15640bcfbf1cb3510a51
   m_configObjects: {}

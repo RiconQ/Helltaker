@@ -272,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.data[0]
       value: 
-      objectReference: {fileID: 21300000, guid: 10ddde1be52ffac4589195f8e33020a3, type: 3}
+      objectReference: {fileID: 21300000, guid: 9d4899194bc1c6140ac044376287ded8, type: 3}
     - target: {fileID: 2658065473365474704, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: portraits.Array.data[1]
       value: 
@@ -424,6 +424,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
+      propertyPath: booper
+      value: 
+      objectReference: {fileID: 1882710383}
+    - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: clearUI
       value: 
       objectReference: {fileID: 1882710382}
@@ -478,7 +482,7 @@ PrefabInstance:
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: selectBox.Array.data[2]
       value: 
-      objectReference: {fileID: 1882710383}
+      objectReference: {fileID: 0}
     - target: {fileID: 5434329890471407510, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -740,17 +744,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1002797190, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
   m_PrefabInstance: {fileID: 1882710381}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1882710383 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 764206090, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
+--- !u!1 &1882710383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7239034258231660232, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
   m_PrefabInstance: {fileID: 1882710381}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1882710384 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1444402326, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}

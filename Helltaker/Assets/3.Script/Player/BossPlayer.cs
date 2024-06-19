@@ -7,11 +7,13 @@ public class BossPlayer : MonoBehaviour
     [SerializeField] private GameObject[] sinPyre;
     [SerializeField] private int index = 0;
     [SerializeField] private Sprite fireOff;
+    public bool isCheat = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("BossChain"))
         {
+            if (isCheat) return;
             if (index == 3)
                 GameManager.instance.OnDie();
 

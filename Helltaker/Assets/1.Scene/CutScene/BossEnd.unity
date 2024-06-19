@@ -522,6 +522,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
+      propertyPath: booper
+      value: 
+      objectReference: {fileID: 2122668748}
+    - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: clearUI
       value: 
       objectReference: {fileID: 1491021403}
@@ -576,7 +580,7 @@ PrefabInstance:
     - target: {fileID: 5434329890471407507, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: selectBox.Array.data[2]
       value: 
-      objectReference: {fileID: 1619104324}
+      objectReference: {fileID: 0}
     - target: {fileID: 5434329890471407510, guid: 934010f369218da47a941fcd8d9fdd1c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -678,7 +682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643693, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: levelName
-      value: Level 11_Home
+      value: Level 10
       objectReference: {fileID: 0}
     - target: {fileID: 8169343121520643695, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
       propertyPath: m_RootOrder
@@ -726,17 +730,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d31ba3de659b0f429a6303917fd0432, type: 3}
---- !u!114 &1619104324 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 764206090, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
-  m_PrefabInstance: {fileID: 2122668747}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1754032430 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070320923286348568, guid: 5578f900ddd773848a5f7dfd390b3547, type: 3}
@@ -898,3 +891,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
+--- !u!1 &2122668748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7239034258231660232, guid: b68579d723869c64f8c6c417de92cb2b, type: 3}
+  m_PrefabInstance: {fileID: 2122668747}
+  m_PrefabAsset: {fileID: 0}
